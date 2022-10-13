@@ -41,7 +41,6 @@ void transform(char *c, sequence_t *seq){
   cur = seq->tete;
   while(cur!=NULL){
     cur = cur->suivant;
-    conversion(&cur->command,seq);
   }
   cur = cel;
 }
