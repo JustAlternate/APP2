@@ -35,7 +35,8 @@ int interprete (sequence_t* seq, bool debug)
     }
     if (debug) stop();
 
-    int ret; 
+    int ret;
+    int compteur;
 
     char commande;
 
@@ -85,8 +86,15 @@ int interprete (sequence_t* seq, bool debug)
                 break;
             case '{':
                 debut = current_cel; // attentio deb est peut être NULL
-                while(current_cel->suivant->command != '}'){ // on part du principe que le groupe de commande a une fin
+                compteur = 0; //pour les if imbriqués
+                while(current_cel->suivant->command != '}' && compteur == 0){ // on part du principe que le groupe de commande a une fin
                     current_cel = current_cel->suivant;
+                    if (current_cel->command == '{'){
+                        compteur++;
+                    }
+                    if (current_cel->command == '}'){
+                        compteur--;
+                    }
                 }
                 dernier = current_cel;
                 current_cel = current_cel->suivant;
