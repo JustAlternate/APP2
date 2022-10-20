@@ -175,7 +175,7 @@ void detruireCelluleDouble (cellule_double* cel)
 
 
 void empiler_int(pile *p, int x){
-  cellule_t *cel = nouvelleCelluleDouble();
+  cellule_double *cel = nouvelleCelluleDouble();
   cel->valeur_entier = x;
   cel->groupe_de_commande = NULL;
   cel->suivant = p->tete;
