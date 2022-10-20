@@ -339,18 +339,18 @@ void multiplication(pile *p){
 
 
 //fonction d'actions:
-cellule_t *condition(pile *Pile, cellule_t *Routine){
+void condition(pile *Pile, cellule_t *Routine){
   if (Pile->tete == NULL){ // On va verifie que la pile contient bien 3 éléments (du bon type lol)
-    return Routine;
+    return;
   }
   if (Pile->tete->suivant == NULL || type_cellule_double(Pile->tete) == INT){
-    return Routine;
+    return ;
   }
   if (Pile->tete->suivant->suivant == NULL || type_cellule_double(Pile->tete->suivant) == INT){
-    return Routine;
+    return ;
   }
   if (type_cellule_double(Pile->tete->suivant->suivant)==GDC){
-    return Routine;
+    return ;
   }
   //tous est bon lancer la fonction:
   int booleen;
