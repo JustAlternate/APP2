@@ -318,9 +318,9 @@ void condition(pile *Pile, cellule_t *Routine){
   }
   //tous est bon lancer la fonction:
   int booleen;
-  cellule_t *choix1;
-  cellule_t *choix2;
-  cellule_t *poubelle;
+  cellule_t *choix1 = NULL;
+  cellule_t *choix2 = NULL;
+  cellule_t *poubelle = NULL;
   depiler(Pile, &booleen, choix1);//va dans choix1 (on a vérifié)
   depiler(Pile, &booleen, choix2);//va dans choix2 (on a vérifié)
   depiler(Pile, &booleen, poubelle);//va dans booleen (on a vérifié)
