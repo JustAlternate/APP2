@@ -178,7 +178,7 @@ void empiler_int(pile *p, int x){
   cellule_double *cel = nouvelleCelluleDouble();
   cel->valeur_entier = x;
   cel->groupe_de_commande = NULL;
-  cel->suivant = p->tete;
+  cel-> = p->tete;
   p->tete = cel;
 }
 
