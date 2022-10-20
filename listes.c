@@ -224,14 +224,14 @@ int depiler_int(pile *p){
 
 cellule_t *depiler_groupe_de_commande(pile *p){
   printf("pile avant depilage (GDC) : ");
-  afficher(p);
+  afficher_pile_double(p);
   cellule_double *cel = p->tete;
   cellule_t *resultat = cel->groupe_de_commande;
 
   p->tete = p->tete->suivant;
   free(cel);
   printf("pile apres depilage (GDC) : ");
-  afficher(p);
+  afficher_pile_double(p);
   return resultat;
 }
 
