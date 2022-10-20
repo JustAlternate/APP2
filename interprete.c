@@ -66,10 +66,10 @@ int interprete (sequence_t* seq, bool debug)
                 gauche();
                 break;
             case 'P':
-                pose(depiler(pile_calculette));
+                pose(depiler_int(pile_calculette));
                 break;
             case 'M':
-                empiler(pile_calculette,mesure(depiler(pile_calculette)));
+                empiler(pile_calculette,mesure(depiler_int(pile_calculette)));
                 break;/*
             case '+':
                 addition(pile_calculette);

@@ -70,7 +70,10 @@ void afficher_pile (sequence_t* seq);
 
 void empiler_int(pile *p, int x);
 void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande);
+
 int depiler(pile *p, int *valeur_entier, cellule_t **groupe_de_commande);
+cellule_t *depiler_groupe_de_commande(pile *p);
+int depiler_int(pile *p);
 
 void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande);
 void condition(pile *Pile, cellule_t *Routine);

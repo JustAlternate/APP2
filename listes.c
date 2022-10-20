@@ -196,6 +196,25 @@ void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande){ // Pass
   p->tete = cel;
 }
 
+int depiler_int(pile *p){
+  cellule_double *cel = p->tete
+  int resultat = cel->valeur_entier
+
+  p->tete = p->tete->suivant;
+  free(cel);
+  return resultat;
+}
+
+cellule_t *depiler_groupe_de_commande(pile *p){
+  cellule_double *cel = p->tete
+  cellule_t resultat = cel->groupe_de_commande
+
+  p->tete = p->tete->suivant;
+  free(cel);
+  return resultat;
+}
+
+
 int depiler(pile *p, int *valeur_entier, cellule_t **groupe_de_commande){
   if (p->tete == NULL){
     return -1;
@@ -215,7 +234,7 @@ int depiler(pile *p, int *valeur_entier, cellule_t **groupe_de_commande){
   }
 
   p->tete = p->tete->suivant;
-  detruireCelluleDouble(cel);
+  free(cel);
   return resultat;
 }
 
