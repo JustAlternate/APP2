@@ -207,7 +207,7 @@ int depiler_int(pile *p){
 
 cellule_t *depiler_groupe_de_commande(pile *p){
   cellule_double *cel = p->tete;
-  cellule_t resultat = cel->groupe_de_commande;
+  cellule_t *resultat = cel->groupe_de_commande;
 
   p->tete = p->tete->suivant;
   free(cel);
