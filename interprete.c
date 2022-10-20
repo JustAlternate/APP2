@@ -87,7 +87,7 @@ int interprete (sequence_t* seq, bool debug)
             case '{':
                 debut = current_cel; // attentio deb est peut être NULL
                 compteur = 0; //pour les if imbriqués
-                while(current_cel->suivant->command != '}' && compteur == 0){ // on part du principe que le groupe de commande a une fin
+                while(current_cel->suivant->command != '}' || compteur != 0){ // on part du principe que le groupe de commande a une fin
                     current_cel = current_cel->suivant;
                     if (current_cel->command == '{'){
                         compteur++;
