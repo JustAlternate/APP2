@@ -80,17 +80,7 @@ int interprete (sequence_t* seq, bool debug)
                 multiplication(pile_calculette);
                 break;
             case '?':
-                if (pile_calculette->tete == NULL){ // On va verifie que la pile contient bien 3 éléments (du bon type lol)
-                  break;
-                }
-                if (pile_calculette->tete->suivant == NULL || type_cellule_double(pile_calculette->tete) == INT){
-                  break;
-                }
-                if (pile_calculette->tete->suivant->suivant == NULL || type_cellule_double(pile_calculette->tete->suivant) == INT){
-                  break;}
-                if (type_cellule_double(pile_calculette->tete->suivant->suivant)==GDC){
-                  break;
-                }
+                condition(pile_calculette,current_cel)
                 
             default:
                 printf("Caractère spécial: '%c'\n", commande);

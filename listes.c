@@ -19,6 +19,8 @@
 
 bool silent_mode = false;
 
+
+
 cellule_t* nouvelleCellule (void)
 {
     cellule_t *cel = malloc(sizeof(cellule_t)); 
@@ -151,6 +153,17 @@ void detruireGroupeDeCommande(cellule_double *cel_db){
   }
 }
 
+// version 2 pas sur de l'implementation
+void detruireGroupeDeCommande_V2_attention(cellule_t *cur){
+  cellule_t *prec;
+  while (cur != NULL)
+  {
+    prec = cur;
+    cur = cur->suivant;
+    free(prec);
+  }
+}
+
 void detruireCelluleDouble (cellule_double* cel)
 {
   if (cel->groupe_de_commande != NULL){
@@ -158,6 +171,8 @@ void detruireCelluleDouble (cellule_double* cel)
   }
   free(cel);
 }
+
+
 
 void empiler_int(pile *p, int x){
   cellule_t *cel = nouvelleCelluleDouble();
@@ -202,6 +217,15 @@ int depiler(pile *p, int *valeur_int, cellule_t *groupe_de_commande){
   p->tete = p->tete->suivant;
   detruireCelluleDouble(cel);
   return resultat;
+}
+
+cellule_t *dernier(sequence_t *seq){
+  cellule_t *cur = seq->tete;
+  while (cur != NULL)
+  {
+    cur = cur->suivant;
+  }
+  return cur;
 }
 
 void afficher_suites_de_cellule_t(cellule_t *cel){
@@ -274,3 +298,44 @@ void multiplication(pile *p){
   }
 }
 
+
+
+//fonction d'actions:
+void conditionnelle(pile *Pile, cellule_t *Routine){
+  if (Pile->tete == NULL){ // On va verifie que la pile contient bien 3 éléments (du bon type lol)
+    return;
+  }
+  if (Pile->tete->suivant == NULL || type_cellule_double(Pile->tete) == INT){
+    return;
+  }
+  if (Pile->tete->suivant->suivant == NULL || type_cellule_double(Pile->tete->suivant) == INT){
+    return;
+  }
+  if (type_cellule_double(Pile->tete->suivant->suivant)==GDC){
+    return;
+  }
+  //tous est bon lancer la fonction:
+  int booleen;
+  sequence_t *choix1;
+  sequence_t *choix2;
+  sequence_t *poubelle;
+  depiler(Pile, &booleen, choix1);//va dans choix1 (on a vérifié)
+  depiler(Pile, &booleen, choix2);//va dans choix2 (on a vérifié)
+  depiler(Pile, &booleen, poubelle);//va dans booleen (on a vérifié)
+  sequence_t *der;
+  if (booleen)
+  {//on met choix1 dans la routine et on free choix2
+    der = dernier(choix1); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
+    der->suivant = Routine->suivant;
+    Routine->suivant = choix1;
+    detruireGroupeDeCommande_V2_attention(choix2);
+    return;
+  }
+  else
+  {//et inversement
+    der = dernier(choix2); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
+    der->suivant = Routine->suivant;
+    Routine->suivant = choix2;
+    detruireGroupeDeCommande_V2_attention(choix1);
+  }
+}
