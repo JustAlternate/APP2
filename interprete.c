@@ -40,7 +40,7 @@ int interprete (sequence_t* seq, bool debug)
     char commande;
 
     cellule_t *current_cel;
-    cellule_t* debut, dernier; //pour les chaines de commande
+    cellule_t *debut, *dernier; //pour les chaines de commande
     current_cel = seq->tete;
     pile *pile_calculette = creer_pile();
 
@@ -69,7 +69,7 @@ int interprete (sequence_t* seq, bool debug)
                 pose(depiler_int(pile_calculette));
                 break;
             case 'M':
-                empiler(pile_calculette,mesure(depiler_int(pile_calculette)));
+                empiler_int(pile_calculette,mesure(depiler_int(pile_calculette)));
                 break;/*
             case '+':
                 addition(pile_calculette);
@@ -97,7 +97,7 @@ int interprete (sequence_t* seq, bool debug)
                 if (commande <= '9' && '0' <= commande){
                   empiler_int(pile_calculette,(commande-'0'));
                 }
-                afficher_pile(pile_calculette);
+                afficher_pile_double(pile_calculette);
                 break;
         }
         current_cel = current_cel->suivant;

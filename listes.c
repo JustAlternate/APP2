@@ -172,6 +172,12 @@ void detruireCelluleDouble (cellule_double* cel)
   free(cel);
 }
 
+pile *creer_pile(){
+  pile *p = malloc(sizeof(pile));
+  p->tete = NULL;
+  return p;
+}
+
 
 
 void empiler_int(pile *p, int x){
