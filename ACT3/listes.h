@@ -32,18 +32,9 @@ typedef struct cellule {
 
 } cellule_t;
 
-typedef struct cellule_double{
-
-    int valeur_entier;
-    cellule groupe_de_commande;
-    struct cellule_double *suivant;
-
-} cellule_double;
-
 struct sequence {
     cellule_t *tete;
 };
-
 typedef struct sequence sequence_t;
 typedef sequence_t pile;
     
@@ -66,5 +57,8 @@ void conversion (char *texte, sequence_t *seq);
 
 void afficher (sequence_t* seq);
 void afficher_pile (sequence_t* seq);
+
+
+
 
 #endif

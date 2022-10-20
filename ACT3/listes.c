@@ -7,8 +7,6 @@
 #endif
 #include "listes.h"
 
-#define GDC 0 //est une groupe de commande.
-#define INT 1
 
 /*
  *  Auteur(s) :
@@ -18,15 +16,15 @@
  */
 
 bool silent_mode = false;
-
 cellule_t* nouvelleCellule (void)
 {
+    /* À compléter (utiliser malloc) */
     cellule_t *cel = malloc(sizeof(cellule_t)); 
     return cel;
 }
-
 void detruireCellule (cellule_t* cel)
 {
+    /* À compléter (utiliser free) */
     free(cel);
 }
 void vider_liste_t(sequence_t *seq){
@@ -85,6 +83,7 @@ void afficher (sequence_t* seq)
 
 // Definition des fonctions de pile FILO.
 
+
 pile *creer_pile(){
   pile *p = malloc(sizeof(pile));
   p->tete = NULL;
@@ -120,6 +119,18 @@ char sommet(pile *p){
   }
 }
 
+char depiler(pile *p){
+  if (p->tete != NULL){
+    cellule_t *cel = p->tete;
+    char c = cel->command;
+    p->tete = p->tete->suivant;
+    detruireCellule(cel);
+    return c;
+  }
+  return '!';
+}
+
+
 
 void afficher_pile(pile * p){
     assert (p); /* Le pointeur doit être valide */
@@ -131,108 +142,13 @@ void afficher_pile(pile * p){
     }
 }
 
-// Definition méthodes pour act4 :
-
-cellule_double* nouvelleCelluleDouble(void)
-{
-    cellule_double *cel = malloc(sizeof(cellule_double)); 
-    cel->valeur_int = -1;
-    cel->groupe_de_commande = NULL;
-    return cel;
-}
-
-void detruireGroupeDeCommande(cellule_double *cel_db){
-  cellule_t *prec;
-  cellule_t *cur = cel_db->groupe_de_commande;
-  while (cur != NULL){
-    prec = cur;
-    cur = cur->suivant;
-    free(prec);
-  }
-}
-
-void detruireCelluleDouble (cellule_double* cel)
-{
-  if (cel->groupe_de_commande != NULL){
-    detruireGroupeDeCommande(cel);
-  }
-  free(cel);
-}
-
-void empiler_int(pile *p, int x){
-  cellule_t *cel = nouvelleCelluleDouble();
-  cel->valeur_int = x;
-  cel->groupe_de_commande = NULL;
+void empiler(pile *p, char x){
+  cellule_t *cel = nouvelleCellule();
+  cel->command = x;
   cel->suivant = p->tete;
   p->tete = cel;
 }
 
-
-void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande){ // Passer en argument un groupe de commande de la forme A->G->D->A->NULL
-  if (groupe_de_commande == NULL){
-    cellule_t *cel_espace = nouvelleCellule();
-    cel_espace->command = ' ';
-    cel_espace->suivant = NULL;
-    groupe_de_commande = cel_espace;
-  }
-  cellule_double *cel = nouvelleCelluleDouble();
-  cel->groupe_de_commande = groupe_de_commande;
-  cel->suivant = p->tete;
-  p->tete = cel;
-}
-
-int depiler(pile *p, int *valeur_int, cellule_t *groupe_de_commande){
-  if (p->tete == NULL){
-    return -1;
-  }
-
-  int resultat;
-
-  cellule_double *cel = p->tete;
-
-  if (cel->groupe_de_commande == NULL){
-    valeur_int = cel->valeur_int;
-    resultat = INT;
-    
-  }else{
-    groupe_de_commande = cel->groupe_de_commande;
-    resultat = GDC;
-  }
-
-  p->tete = p->tete->suivant;
-  detruireCelluleDouble(cel);
-  return resultat;
-}
-
-void afficher_suites_de_cellule_t(cellule_t *cel){
-  while(cel !=NULL){
-    printf("%c ",cel->command);
-    cel = cel->suivant;
-  }
-}
-
-void afficher_pile_double(pile * p){
-    assert (p);
-    cellule_double *cur;
-    cur = p->tete;
-    while(cur!=NULL){
-      if (cel->groupe_de_commande == NULL){
-        printf("%d ",cur->valeur_int);
-      }else{
-        printf("{");
-        afficher_suites_de_cellule_t(cur->groupe_de_commande);
-        printf("} ");
-      }
-      cur = cur->suivant;
-    }
-}
-
-int type_cellule_double(cellule_double *cel_db){
-  if(cel_db->groupe_de_commande == NULL){
-    return INT;
-  }
-  return GDC; 
-}
 
 // Definition des fonctions arithmetique simple.
 
@@ -273,4 +189,7 @@ void multiplication(pile *p){
     }
   }
 }
+
+// Definition des fonctions poser et mesurer :
+
 

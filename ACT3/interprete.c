@@ -57,7 +57,7 @@ int interprete (sequence_t* seq, bool debug)
                   detruire_pile(pile_calculette);
                   return RATE;
                 }   
-                break;
+                break; /* à ne jamais oublier !!! */
             case 'D':
                 droite();
                 break;
@@ -79,19 +79,6 @@ int interprete (sequence_t* seq, bool debug)
             case '*':
                 multiplication(pile_calculette);
                 break;
-            case '?':
-                if (pile_calculette->tete == NULL){ // On va verifie que la pile contient bien 3 éléments (du bon type lol)
-                  break;
-                }
-                if (pile_calculette->tete->suivant == NULL || type_cellule_double(pile_calculette->tete) == INT){
-                  break;
-                }
-                if (pile_calculette->tete->suivant->suivant == NULL || type_cellule_double(pile_calculette->tete->suivant) == INT){
-                  break;}
-                if (type_cellule_double(pile_calculette->tete->suivant->suivant)==GDC){
-                  break;
-                }
-                
             default:
                 printf("Caractère spécial: '%c'\n", commande);
                 if (commande <= '9' && '0' <= commande){
