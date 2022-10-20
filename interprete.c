@@ -82,6 +82,7 @@ int interprete (sequence_t* seq, bool debug)
                 break;*/
             case '?':
                 condition(pile_calculette, current_cel);
+                break;
             case '{':
                 debut = current_cel; // attentio deb est peut être NULL
                 while(current_cel->suivant->command != '}'){ // on part du principe que le groupe de commande a une fin
@@ -91,15 +92,17 @@ int interprete (sequence_t* seq, bool debug)
                 current_cel = current_cel->suivant;
                 dernier->suivant = NULL;
                 empiler_groupe_de_commande(pile_calculette, debut->suivant);
+                break;
 
             default:
                 printf("Caractère spécial: '%c'\n", commande);
                 if (commande <= '9' && '0' <= commande){
                   empiler_int(pile_calculette,(commande-'0'));
                 }
-                afficher_pile_double(pile_calculette);
                 break;
         }
+        printf("Pile : ");
+        afficher_pile_double(pile_calculette);
         seq->tete = current_cel->suivant;
         free(current_cel);
         current_cel = seq->tete;
