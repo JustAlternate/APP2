@@ -223,11 +223,15 @@ int depiler_int(pile *p){
 }
 
 cellule_t *depiler_groupe_de_commande(pile *p){
+  printf("pile avant depilage (GDC) : ");
+  afficher(p);
   cellule_double *cel = p->tete;
   cellule_t *resultat = cel->groupe_de_commande;
 
   p->tete = p->tete->suivant;
   free(cel);
+  printf("pile apres depilage (GDC) : ");
+  afficher(p);
   return resultat;
 }
 
@@ -362,7 +366,7 @@ void condition(pile *Pile, cellule_t *Routine){
   cellule_t *der;
   if (booleen)
   {//on met choix1 dans la routine et on free choix2
-    printf("le premier : %c", choix1->command)
+    printf("le premier : %c", choix1->command);
     der = dernier_suite_cellule_t(choix1); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
     printf("le dernier est: %c", der->command);
     der->suivant = Routine->suivant;
