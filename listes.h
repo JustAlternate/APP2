@@ -35,7 +35,7 @@ typedef struct cellule {
 typedef struct cellule_double{
 
     int valeur_entier;
-    cellule groupe_de_commande;
+    cellule_t groupe_de_commande;
     struct cellule_double *suivant;
 
 } cellule_double;
@@ -66,5 +66,8 @@ void conversion (char *texte, sequence_t *seq);
 
 void afficher (sequence_t* seq);
 void afficher_pile (sequence_t* seq);
+
+void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande);
+void condition(pile *Pile, cellule_t *Routine)
 
 #endif

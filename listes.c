@@ -303,7 +303,7 @@ void multiplication(pile *p){
 
 
 //fonction d'actions:
-void conditionnelle(pile *Pile, cellule_t *Routine){
+void condition(pile *Pile, cellule_t *Routine){
   if (Pile->tete == NULL){ // On va verifie que la pile contient bien 3 éléments (du bon type lol)
     return;
   }
