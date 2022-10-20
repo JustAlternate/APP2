@@ -51,11 +51,11 @@ int interprete (sequence_t* seq, bool debug)
             case 'A':
                 ret = avance();
                 if (ret == VICTOIRE){
-                  detruire_pile(pile_calculette);
+                  detruire_pile_double(pile_calculette);
                   return VICTOIRE;
                 }
                 if (ret == RATE){
-                  detruire_pile(pile_calculette);
+                  detruire_pile_double(pile_calculette);
                   return RATE;
                 }   
                 break;
