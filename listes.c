@@ -154,7 +154,7 @@ void detruireGroupeDeCommande(cellule_double *cel_db){
 }
 
 // version 2 pas sur de l'implementation
-void detruireGroupeDeCommande_V2_attention(cellule_t *cur){
+void detruireCellule_t(cellule_t *cur){
   cellule_t *prec;
   while (cur != NULL)
   {
@@ -219,9 +219,11 @@ int depiler(pile *p, int *valeur_int, cellule_t *groupe_de_commande){
   return resultat;
 }
 
-cellule_t *dernier(sequence_t *seq){
-  cellule_t *cur = seq->tete;
-  while (cur != NULL)
+cellule_t *dernier_suite_cellule_t(cellule_t *cur){
+  if (cur == NULL) {
+    return NULL
+  }
+  while (cur->suivant != NULL)
   {
     cur = cur->suivant;
   }
@@ -328,7 +330,7 @@ void conditionnelle(pile *Pile, cellule_t *Routine){
     der = dernier(choix1); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
     der->suivant = Routine->suivant;
     Routine->suivant = choix1;
-    detruireGroupeDeCommande_V2_attention(choix2);
+    detruireCellule_t(choix2);
     return;
   }
   else
@@ -336,6 +338,6 @@ void conditionnelle(pile *Pile, cellule_t *Routine){
     der = dernier(choix2); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
     der->suivant = Routine->suivant;
     Routine->suivant = choix2;
-    detruireGroupeDeCommande_V2_attention(choix1);
+    detruireCellule_t(choix1);
   }
 }
