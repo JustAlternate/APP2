@@ -40,6 +40,7 @@ int interprete (sequence_t* seq, bool debug)
     char commande;
 
     cellule_t *current_cel;
+    cellule_t* debut, dernier; //pour les chaines de commande
     current_cel = seq->tete;
     pile *pile_calculette = creer_pile();
 
@@ -80,7 +81,16 @@ int interprete (sequence_t* seq, bool debug)
                 multiplication(pile_calculette);
                 break;
             case '?':
-                condition(pile_calculette,current_cel)
+                condition(pile_calculette, current_cel);
+            case '{':
+                debut = current_cel; // attentio deb est peut être NULL
+                while(current_cel->suivant->command != '}'){ // on part du principe que le groupe de commande a une fin
+                    current_cel = current_cel->suivant;
+                }
+                dernier = current_cel;
+                current_cel = current_cel->suivant;
+                dernier->suivant = NULL;
+                empiler_groupe_de_commande(pile_calculette, debut->suivant);
                 
             default:
                 printf("Caractère spécial: '%c'\n", commande);
@@ -91,6 +101,7 @@ int interprete (sequence_t* seq, bool debug)
                 break;
         }
         current_cel = current_cel->suivant;
+        // ce serait bien de free la précédente cel
         /* Affichage pour faciliter le debug */
         afficherCarte();
         printf ("Programme:");
