@@ -372,7 +372,7 @@ void condition(pile *Pile, cellule_t *Routine){
   choix2 = depiler_groupe_de_commande(Pile);//va dans choix2 (on a vérifié)
   booleen = depiler_int(Pile);//va dans booleen (on a vérifié)
   cellule_t *der;
-  if (booleen)
+  if (! booleen)
   {//on met choix1 dans la routine et on free choix2
     printf("le premier : %c \n", choix1->command);
     der = dernier_suite_cellule_t(choix1); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
