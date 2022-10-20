@@ -70,7 +70,7 @@ int interprete (sequence_t* seq, bool debug)
                 break;
             case 'M':
                 empiler(pile_calculette,mesure(depiler(pile_calculette)));
-                break;
+                break;/*
             case '+':
                 addition(pile_calculette);
                 break;
@@ -79,7 +79,7 @@ int interprete (sequence_t* seq, bool debug)
                 break;
             case '*':
                 multiplication(pile_calculette);
-                break;
+                break;*/
             case '?':
                 condition(pile_calculette, current_cel);
             case '{':
@@ -91,11 +91,11 @@ int interprete (sequence_t* seq, bool debug)
                 current_cel = current_cel->suivant;
                 dernier->suivant = NULL;
                 empiler_groupe_de_commande(pile_calculette, debut->suivant);
-                
+
             default:
                 printf("Caractère spécial: '%c'\n", commande);
                 if (commande <= '9' && '0' <= commande){
-                  empiler(pile_calculette,(commande-'0'));
+                  empiler_int(pile_calculette,(commande-'0'));
                 }
                 afficher_pile(pile_calculette);
                 break;

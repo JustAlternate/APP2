@@ -45,7 +45,10 @@ struct sequence {
 };
 
 typedef struct sequence sequence_t;
-typedef sequence_t pile;
+
+typedef struct pile{
+    cellule_double *tete;
+} pile;
     
 cellule_t* nouvelleCellule (void);
 

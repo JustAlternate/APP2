@@ -86,7 +86,7 @@ void afficher (sequence_t* seq)
 }
 
 // Definition des fonctions de pile FILO.
-
+/*
 pile *creer_pile(){
   pile *p = malloc(sizeof(pile));
   p->tete = NULL;
@@ -124,7 +124,7 @@ char sommet(pile *p){
 
 
 void afficher_pile(pile * p){
-    assert (p); /* Le pointeur doit être valide */
+    assert (p); // Le pointeur doit être valide 
     cellule_t *cur;
     cur = p->tete;
     while(cur!=NULL){
@@ -132,7 +132,7 @@ void afficher_pile(pile * p){
       cur = cur->suivant;
     }
 }
-
+*/
 // Definition méthodes pour act4 :
 
 cellule_double* nouvelleCelluleDouble(void)
@@ -178,7 +178,7 @@ void empiler_int(pile *p, int x){
   cellule_double *cel = nouvelleCelluleDouble();
   cel->valeur_entier = x;
   cel->groupe_de_commande = NULL;
-  cel-> = p->tete;
+  cel->suivant = p->tete;
   p->tete = cel;
 }
 
@@ -221,7 +221,7 @@ int depiler(pile *p, int *valeur_entier, cellule_t *groupe_de_commande){
 
 cellule_t *dernier_suite_cellule_t(cellule_t *cur){
   if (cur == NULL) {
-    return NULL
+    return NULL;
   }
   while (cur->suivant != NULL)
   {
@@ -261,7 +261,7 @@ int type_cellule_double(cellule_double *cel_db){
 }
 
 // Definition des fonctions arithmetique simple.
-
+/*
 void addition(pile *p){
   if (!est_vide(p)){
     char last_commande_2 = depiler(p);
@@ -299,7 +299,7 @@ void multiplication(pile *p){
     }
   }
 }
-
+*/
 
 
 //fonction d'actions:
@@ -324,10 +324,10 @@ void condition(pile *Pile, cellule_t *Routine){
   depiler(Pile, &booleen, choix1);//va dans choix1 (on a vérifié)
   depiler(Pile, &booleen, choix2);//va dans choix2 (on a vérifié)
   depiler(Pile, &booleen, poubelle);//va dans booleen (on a vérifié)
-  sequence_t *der;
+  cellule_t *der;
   if (booleen)
   {//on met choix1 dans la routine et on free choix2
-    der = dernier(choix1); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
+    der = dernier_suite_cellule_t(choix1); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
     der->suivant = Routine->suivant;
     Routine->suivant = choix1;
     detruireCellule_t(choix2);
@@ -335,7 +335,7 @@ void condition(pile *Pile, cellule_t *Routine){
   }
   else
   {//et inversement
-    der = dernier(choix2); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
+    der = dernier_suite_cellule_t(choix2); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
     der->suivant = Routine->suivant;
     Routine->suivant = choix2;
     detruireCellule_t(choix1);
