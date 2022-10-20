@@ -62,13 +62,15 @@ void addition(pile *p);
 void soustraction(pile *p);
 void multiplication(pile *p);
 
-void empiler(pile *p,char x);
-char depiler(pile *p);
 
 void conversion (char *texte, sequence_t *seq);
 
 void afficher (sequence_t* seq);
 void afficher_pile (sequence_t* seq);
+
+void empiler_int(pile *p, int x);
+void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande);
+int depiler(pile *p, int *valeur_entier, cellule_t *groupe_de_commande);
 
 void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande);
 void condition(pile *Pile, cellule_t *Routine);

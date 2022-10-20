@@ -206,7 +206,7 @@ int depiler(pile *p, int *valeur_entier, cellule_t *groupe_de_commande){
   cellule_double *cel = p->tete;
 
   if (cel->groupe_de_commande == NULL){
-    valeur_entier = cel->valeur_entier;
+    *valeur_entier = cel->valeur_entier;
     resultat = INT;
     
   }else{
@@ -242,7 +242,7 @@ void afficher_pile_double(pile * p){
     cellule_double *cur;
     cur = p->tete;
     while(cur!=NULL){
-      if (cel->groupe_de_commande == NULL){
+      if (cur->groupe_de_commande == NULL){
         printf("%d ",cur->valeur_entier);
       }else{
         printf("{");
@@ -318,9 +318,9 @@ void condition(pile *Pile, cellule_t *Routine){
   }
   //tous est bon lancer la fonction:
   int booleen;
-  sequence_t *choix1;
-  sequence_t *choix2;
-  sequence_t *poubelle;
+  cellule_t *choix1;
+  cellule_t *choix2;
+  cellule_t *poubelle;
   depiler(Pile, &booleen, choix1);//va dans choix1 (on a vérifié)
   depiler(Pile, &booleen, choix2);//va dans choix2 (on a vérifié)
   depiler(Pile, &booleen, poubelle);//va dans booleen (on a vérifié)
