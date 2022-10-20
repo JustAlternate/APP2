@@ -374,9 +374,9 @@ void condition(pile *Pile, cellule_t *Routine){
   cellule_t *der;
   if (booleen)
   {//on met choix1 dans la routine et on free choix2
-    printf("le premier : %c\n", choix1->command);
+    printf("le premier : %c \n", choix1->command);
     der = dernier_suite_cellule_t(choix1); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
-    printf("le dernier est: %c\n", der->command);
+    printf("le dernier est: %c \n", der->command);
     der->suivant = Routine->suivant;
     Routine->suivant = choix1;
     detruireCellule_t(choix2);
@@ -385,8 +385,9 @@ void condition(pile *Pile, cellule_t *Routine){
   else
   {//et inversement
     der = dernier_suite_cellule_t(choix2); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
-    printf("le dernier est: %c", der->command);
+    printf("le premier : %c \n", choix1->command);
     der->suivant = Routine->suivant;
+    printf("le dernier est: %c \n", der->command);
     Routine->suivant = choix2;
     detruireCellule_t(choix1);
   }
