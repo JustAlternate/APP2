@@ -196,7 +196,7 @@ void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande){ // Pass
   p->tete = cel;
 }
 
-int depiler(pile *p, int *valeur_entier, cellule_t *groupe_de_commande){
+int depiler(pile *p, int *valeur_entier, cellule_t **groupe_de_commande){
   if (p->tete == NULL){
     return -1;
   }
@@ -210,7 +210,7 @@ int depiler(pile *p, int *valeur_entier, cellule_t *groupe_de_commande){
     resultat = INT;
     
   }else{
-    groupe_de_commande = cel->groupe_de_commande;
+    *groupe_de_commande = cel->groupe_de_commande;
     resultat = GDC;
   }
 
@@ -321,9 +321,9 @@ void condition(pile *Pile, cellule_t *Routine){
   cellule_t *choix1 = NULL;
   cellule_t *choix2 = NULL;
   cellule_t *poubelle = NULL;
-  depiler(Pile, &booleen, choix1);//va dans choix1 (on a vérifié)
-  depiler(Pile, &booleen, choix2);//va dans choix2 (on a vérifié)
-  depiler(Pile, &booleen, poubelle);//va dans booleen (on a vérifié)
+  depiler(Pile, &booleen, &choix1);//va dans choix1 (on a vérifié)
+  depiler(Pile, &booleen, &choix2);//va dans choix2 (on a vérifié)
+  depiler(Pile, &booleen, &poubelle);//va dans booleen (on a vérifié)
   cellule_t *der;
   if (booleen)
   {//on met choix1 dans la routine et on free choix2
