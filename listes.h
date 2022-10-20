@@ -56,12 +56,8 @@ void detruireCellule (cellule_t*);
 
 pile *creer_pile(); 
 void vider_pile(pile *p);
-void detruire_pile(pile *p);
 void detruire_pile_double(pile *p);
 
-void addition(pile *p);
-void soustraction(pile *p);
-void multiplication(pile *p);
 
 
 void conversion (char *texte, sequence_t *seq);
