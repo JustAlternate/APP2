@@ -138,7 +138,7 @@ void afficher_pile(pile * p){
 cellule_double* nouvelleCelluleDouble(void)
 {
     cellule_double *cel = malloc(sizeof(cellule_double)); 
-    cel->valeur_int = -1;
+    cel->valeur_entier = -1;
     cel->groupe_de_commande = NULL;
     return cel;
 }
@@ -176,7 +176,7 @@ void detruireCelluleDouble (cellule_double* cel)
 
 void empiler_int(pile *p, int x){
   cellule_t *cel = nouvelleCelluleDouble();
-  cel->valeur_int = x;
+  cel->valeur_entier = x;
   cel->groupe_de_commande = NULL;
   cel->suivant = p->tete;
   p->tete = cel;
@@ -196,7 +196,7 @@ void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande){ // Pass
   p->tete = cel;
 }
 
-int depiler(pile *p, int *valeur_int, cellule_t *groupe_de_commande){
+int depiler(pile *p, int *valeur_entier, cellule_t *groupe_de_commande){
   if (p->tete == NULL){
     return -1;
   }
@@ -206,7 +206,7 @@ int depiler(pile *p, int *valeur_int, cellule_t *groupe_de_commande){
   cellule_double *cel = p->tete;
 
   if (cel->groupe_de_commande == NULL){
-    valeur_int = cel->valeur_int;
+    valeur_entier = cel->valeur_entier;
     resultat = INT;
     
   }else{
@@ -243,7 +243,7 @@ void afficher_pile_double(pile * p){
     cur = p->tete;
     while(cur!=NULL){
       if (cel->groupe_de_commande == NULL){
-        printf("%d ",cur->valeur_int);
+        printf("%d ",cur->valeur_entier);
       }else{
         printf("{");
         afficher_suites_de_cellule_t(cur->groupe_de_commande);

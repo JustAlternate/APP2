@@ -35,7 +35,7 @@ typedef struct cellule {
 typedef struct cellule_double{
 
     int valeur_entier;
-    cellule_t groupe_de_commande;
+    cellule_t *groupe_de_commande;
     struct cellule_double *suivant;
 
 } cellule_double;
