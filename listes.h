@@ -57,6 +57,7 @@ void detruireCellule (cellule_t*);
 pile *creer_pile(); 
 void vider_pile(pile *p);
 void detruire_pile(pile *p);
+void detruire_pile_double(pile *p);
 
 void addition(pile *p);
 void soustraction(pile *p);
@@ -66,7 +67,7 @@ void multiplication(pile *p);
 void conversion (char *texte, sequence_t *seq);
 
 void afficher (sequence_t* seq);
-void afficher_pile (sequence_t* seq);
+void afficher_pile_double (pile *seq);
 
 void empiler_int(pile *p, int x);
 void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande);

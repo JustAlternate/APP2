@@ -178,6 +178,17 @@ pile *creer_pile(){
   return p;
 }
 
+void detruire_pile_double(pile *p){
+  cellule_double *cur = p->tete;
+  cellule_double *prec;
+  while (cur != NULL)
+  {
+    prec = cur;
+    cur = cur->suivant;
+    detruireCelluleDouble(prec)
+  }
+  free(p);
+}
 
 
 void empiler_int(pile *p, int x){
