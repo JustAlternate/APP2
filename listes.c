@@ -185,7 +185,7 @@ void detruire_pile_double(pile *p){
   {
     prec = cur;
     cur = cur->suivant;
-    detruireCelluleDouble(prec)
+    detruireCelluleDouble(prec);
   }
   free(p);
 }
