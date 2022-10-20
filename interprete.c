@@ -113,6 +113,6 @@ int interprete (sequence_t* seq, bool debug)
     /* Si on sort de la boucle sans arriver sur la cible,
      * c'est raté :-( */
 
-    detruire_pile(p);
+    detruire_pile_double(pile_calculette);
     return CIBLERATEE;
 }
