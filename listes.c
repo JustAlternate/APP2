@@ -339,31 +339,32 @@ void multiplication(pile *p){
 
 
 //fonction d'actions:
-void condition(pile *Pile, cellule_t *Routine){
+cellule_t *condition(pile *Pile, cellule_t *Routine){
   if (Pile->tete == NULL){ // On va verifie que la pile contient bien 3 éléments (du bon type lol)
-    return;
+    return Routine;
   }
   if (Pile->tete->suivant == NULL || type_cellule_double(Pile->tete) == INT){
-    return;
+    return Routine;
   }
   if (Pile->tete->suivant->suivant == NULL || type_cellule_double(Pile->tete->suivant) == INT){
-    return;
+    return Routine;
   }
   if (type_cellule_double(Pile->tete->suivant->suivant)==GDC){
-    return;
+    return Routine;
   }
   //tous est bon lancer la fonction:
   int booleen;
   cellule_t *choix1 = NULL;
   cellule_t *choix2 = NULL;
-  cellule_t *poubelle = NULL;
-  depiler(Pile, &booleen, &choix1);//va dans choix1 (on a vérifié)
-  depiler(Pile, &booleen, &choix2);//va dans choix2 (on a vérifié)
-  depiler(Pile, &booleen, &poubelle);//va dans booleen (on a vérifié)
+  choix1 = depiler_groupe_de_commande(Pile);//va dans choix1 (on a vérifié)
+  choix2 = depiler_groupe_de_commande(Pile);//va dans choix2 (on a vérifié)
+  booleen = depiler_int(Pile);//va dans booleen (on a vérifié)
   cellule_t *der;
   if (booleen)
   {//on met choix1 dans la routine et on free choix2
+    printf("le premier : %c", choix1->command)
     der = dernier_suite_cellule_t(choix1); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
+    printf("le dernier est: %c", der->command);
     der->suivant = Routine->suivant;
     Routine->suivant = choix1;
     detruireCellule_t(choix2);
@@ -372,6 +373,7 @@ void condition(pile *Pile, cellule_t *Routine){
   else
   {//et inversement
     der = dernier_suite_cellule_t(choix2); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
+    printf("le dernier est: %c", der->command);
     der->suivant = Routine->suivant;
     Routine->suivant = choix2;
     detruireCellule_t(choix1);
