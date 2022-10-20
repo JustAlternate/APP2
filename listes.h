@@ -68,6 +68,6 @@ void afficher (sequence_t* seq);
 void afficher_pile (sequence_t* seq);
 
 void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande);
-void condition(pile *Pile, cellule_t *Routine)
+void condition(pile *Pile, cellule_t *Routine);
 
 #endif
