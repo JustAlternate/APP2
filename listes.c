@@ -331,26 +331,26 @@ void multiplication(pile *p){
 
 
 //fonction d'actions:
-void condition(pile *Pile, cellule_t *Routine){
-  if (Pile->tete == NULL){ // On va verifie que la pile contient bien 3 éléments (du bon type lol)
+void condition(pile *p, cellule_t *Routine){
+  if (p->tete == NULL){ // On va verifie que la pile contient bien 3 éléments (du bon type lol)
     return;
   }
-  if (Pile->tete->suivant == NULL || type_cellule_double(Pile->tete) == INT){
+  if (p->tete->suivant == NULL || type_cellule_double(p->tete) == INT){
     return ;
   }
-  if (Pile->tete->suivant->suivant == NULL || type_cellule_double(Pile->tete->suivant) == INT){
+  if (p->tete->suivant->suivant == NULL || type_cellule_double(p->tete->suivant) == INT){
     return ;
   }
-  if (type_cellule_double(Pile->tete->suivant->suivant)==GDC){
+  if (type_cellule_double(p->tete->suivant->suivant)==GDC){
     return ;
   }
   //tous est bon lancer la fonction:
   int booleen;
   cellule_t *choix1 = NULL;
   cellule_t *choix2 = NULL;
-  choix1 = depiler_groupe_de_commande(Pile);//va dans choix1 (on a vérifié)
-  choix2 = depiler_groupe_de_commande(Pile);//va dans choix2 (on a vérifié)
-  booleen = depiler_int(Pile);//va dans booleen (on a vérifié)
+  choix1 = depiler_groupe_de_commande(p);//va dans choix1 (on a vérifié)
+  choix2 = depiler_groupe_de_commande(p);//va dans choix2 (on a vérifié)
+  booleen = depiler_int(p);//va dans booleen (on a vérifié)
   cellule_t *der;
   if (! booleen)
   {//on met choix1 dans la routine et on free choix2
@@ -373,22 +373,22 @@ void condition(pile *Pile, cellule_t *Routine){
   }
 }
 
-void echange(pile *Pile){ //il y a normalement au moins 2 elements
-  cellule_double cel1 = pile->tete;
-  Pile->tete = cel1->suivant;
+void echange(pile *p){ //il y a normalement au moins 2 elements
+  cellule_double cel1 = p->tete;
+  p->tete = cel1->suivant;
   cel1->suivant = cel1->suivant->suivant;
-  Pile->tete->suivant = cel1->suivant;
+  p->tete->suivant = cel1->suivant;
 }
 
-void execute(pile * Pile, cellule_t Routine){
-  if(type_cellule_double(Pile->tete) == INT){
+void execute(pile * p, cellule_t Routine){
+  if(type_cellule_double(p->tete) == INT){
     cellule_t nouvelle_cel = nouvelleCellule();
-    nouvelle_cel->command = depiler_int(Pile);
+    nouvelle_cel->command = depiler_int(p);
     nouvelle_cel->suivant = Routine->suivant;
     Routine->suivant = nouvelle_cel;
   }
-  else{ // type_cellule_double(Pile->tete) == GDC
-    cellule_t premiere_cel = depiler_groupe_de_commande(Pile);
+  else{ // type_cellule_double(p->tete) == GDC
+    cellule_t premiere_cel = depiler_groupe_de_commande(p);
     cellule_t derniere_cel = dernier_suite_cellule_t(premiere_cel);
     dernier->suivant = Routine->suivant;
     Routine->suivant = premiere_cel;
