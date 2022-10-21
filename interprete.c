@@ -109,6 +109,9 @@ int interprete (sequence_t* seq, bool debug)
             case 'X':
                 echange(pile_calculette);
                 break;
+            case 'C':
+                clone(pile_calculette, current_cel);
+                break;
             default:
                 printf("Caractère spécial: '%c'\n", commande);
                 if (commande <= '9' && '0' <= commande){

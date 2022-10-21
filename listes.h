@@ -80,5 +80,6 @@ void multiplication(pile *p);
 void condition(pile *Pile, cellule_t *Routine);
 void execute(pile *Pile, cellule_t *Routine);
 void echange(pile *Pile);
+void clone(pile *p, cellule_t Routine);
 
 #endif
