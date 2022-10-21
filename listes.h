@@ -73,6 +73,10 @@ cellule_t *depiler_groupe_de_commande(pile *p);
 int depiler_int(pile *p);
 
 void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande);
+
+void addition(pile *p);
+void soustraction(pile *p);
+void multiplication(pile *p);
 void condition(pile *Pile, cellule_t *Routine);
 void execute(pile *Pile, cellule_t *Routine);
 void echange(pile *Pile);
