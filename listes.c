@@ -372,7 +372,7 @@ void execute(pile * p, cellule_t *Routine){
   }
 }
 
-void clone(pile *p, cellule_t Routine){
+void clone(pile *p, cellule_t *Routine){
   if (type_cellule_double(p->tete) == INT){
     empiler_int(p, p->tete->valeur_entier);
   }
