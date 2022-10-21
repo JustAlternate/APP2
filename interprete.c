@@ -102,7 +102,9 @@ int interprete (sequence_t* seq, bool debug)
                 empiler_groupe_de_commande(pile_calculette, debut->suivant);
                 break;
             case '!':
+                printf("entree d'exec\n");
                 execute(pile_calculette, current_cel);
+                printf("sortie d'exec\n");
             case 'X':
                 echange(pile_calculette);
             default:

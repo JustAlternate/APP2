@@ -398,5 +398,6 @@ void execute(pile * p, cellule_t *Routine){
     derniere_cel->suivant = Routine->suivant;
     printf("4\n");
     Routine->suivant = premiere_cel;
+    printf("5\n");
   }
 }
