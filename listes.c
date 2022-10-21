@@ -394,5 +394,5 @@ void boucle(pile *p, cellule_t *Routine){
   Routine->suivant = nouvelle_cel;
   execute(p, Routine);
   i--;
-  empiler_int(p);
+  empiler_int(p, i);
 }
