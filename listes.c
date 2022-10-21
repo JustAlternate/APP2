@@ -382,14 +382,14 @@ void echange(pile *p){ //il y a normalement au moins 2 elements
 
 void execute(pile * p, cellule_t *Routine){
   if(type_cellule_double(p->tete) == INT){
-    printf("choix int");
+    printf("choix int\n");
     cellule_t *nouvelle_cel = nouvelleCellule();
     nouvelle_cel->command = depiler_int(p);
     nouvelle_cel->suivant = Routine->suivant;
     Routine->suivant = nouvelle_cel;
   }
   else{ // type_cellule_double(p->tete) == GDC
-    printf("choix int");
+    printf("choix int\n");
     cellule_t *premiere_cel = depiler_groupe_de_commande(p);
     cellule_t *derniere_cel = dernier_suite_cellule_t(premiere_cel);
     derniere_cel->suivant = Routine->suivant;
