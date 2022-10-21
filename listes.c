@@ -380,7 +380,7 @@ void echange(pile *p){ //il y a normalement au moins 2 elements
   p->tete->suivant = cel1->suivant;
 }
 
-void execute(pile * p, cellule_t Routine){
+void execute(pile * p, cellule_t *Routine){
   if(type_cellule_double(p->tete) == INT){
     cellule_t *nouvelle_cel = nouvelleCellule();
     nouvelle_cel->command = depiler_int(p);
