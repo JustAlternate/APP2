@@ -385,6 +385,8 @@ void clone(pile *p){
 void boucle(pile *p, cellule_t *Routine){
   int i = depiler_int(p);
   if (i <= 0){
+    cellule_t *cel_a_detruire = depiler_groupe_de_commande(p);
+    detruireCellule_t(cel_a_detruire);
     return;
   }
   clone(p);
