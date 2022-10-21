@@ -23,7 +23,8 @@ bool silent_mode = false;
 
 cellule_t* nouvelleCellule (void)
 {
-    cellule_t *cel = malloc(sizeof(cellule_t)); 
+    cellule_t *cel = malloc(sizeof(cellule_t));
+    cel->suivant = NULL;
     return cel;
 }
 
@@ -308,6 +309,23 @@ int type_cellule_double(cellule_double *cel_db){
   return GDC; 
 }
 
+cellule_t *copie_suite_cellule_t(cellule_t *cel){
+  // normalement il y a au moins une cellule à copier
+  cellule_t *premiere_copie = nouvelleCellule();
+  premiere_copie->command = cel->command;
+  cellule_t *cur_copie = premiere_copie;
+  cellule_t *temp;
+  while (cel->suivant !=NULL){
+    cel = cel->suivant;
+    temp = nouvelleCellule();
+    temp->command = cel->command;
+    cur_copie->suivant = temp;
+    cur_copie = cur_copie->suivant;
+  }
+  return premiere_copie;
+}
+
+
 // Definition des fonctions arithmetique simple.
 
 void addition(pile *p){
@@ -399,5 +417,15 @@ void execute(pile * p, cellule_t *Routine){
     printf("4\n");
     Routine->suivant = premiere_cel;
     printf("5\n");
+  }
+}
+
+void clone(pile *p, cellule_t Routine){
+  if (type_cellule_double(p->tete) == INT){
+    empiler_int(p, p->tete->valeur_entier);
+  }
+  else{//type_cellule_double(p->tete) == GDC
+    cellule_t *temp = copie_suite_cellule_t(p->tete->groupe_de_commande);
+    empiler_groupe_de_commande(p, temp);
   }
 }
