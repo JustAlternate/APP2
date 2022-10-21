@@ -105,8 +105,10 @@ int interprete (sequence_t* seq, bool debug)
                 printf("entree d'exec\n");
                 execute(pile_calculette, current_cel);
                 printf("sortie d'exec\n");
+                break;
             case 'X':
                 echange(pile_calculette);
+                break;
             default:
                 printf("Caractère spécial: '%c'\n", commande);
                 if (commande <= '9' && '0' <= commande){
