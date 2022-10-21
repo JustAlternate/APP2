@@ -374,7 +374,7 @@ void condition(pile *p, cellule_t *Routine){
 }
 
 void echange(pile *p){ //il y a normalement au moins 2 elements
-  cellule_double cel1 = p->tete;
+  cellule_double *cel1 = p->tete;
   p->tete = cel1->suivant;
   cel1->suivant = cel1->suivant->suivant;
   p->tete->suivant = cel1->suivant;
@@ -382,14 +382,14 @@ void echange(pile *p){ //il y a normalement au moins 2 elements
 
 void execute(pile * p, cellule_t Routine){
   if(type_cellule_double(p->tete) == INT){
-    cellule_t nouvelle_cel = nouvelleCellule();
+    cellule_t *nouvelle_cel = nouvelleCellule();
     nouvelle_cel->command = depiler_int(p);
     nouvelle_cel->suivant = Routine->suivant;
     Routine->suivant = nouvelle_cel;
   }
   else{ // type_cellule_double(p->tete) == GDC
-    cellule_t premiere_cel = depiler_groupe_de_commande(p);
-    cellule_t derniere_cel = dernier_suite_cellule_t(premiere_cel);
+    cellule_t *premiere_cel = depiler_groupe_de_commande(p);
+    cellule_t *derniere_cel = dernier_suite_cellule_t(premiere_cel);
     dernier->suivant = Routine->suivant;
     Routine->suivant = premiere_cel;
   }
