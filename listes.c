@@ -390,9 +390,13 @@ void execute(pile * p, cellule_t *Routine){
   }
   else{ // type_cellule_double(p->tete) == GDC
     printf("choix int\n");
+    printf("1\n");
     cellule_t *premiere_cel = depiler_groupe_de_commande(p);
+    printf("2\n");
     cellule_t *derniere_cel = dernier_suite_cellule_t(premiere_cel);
+    printf("3\n");
     derniere_cel->suivant = Routine->suivant;
+    printf("4\n");
     Routine->suivant = premiere_cel;
   }
 }
