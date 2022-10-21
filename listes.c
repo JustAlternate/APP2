@@ -309,45 +309,25 @@ int type_cellule_double(cellule_double *cel_db){
 }
 
 // Definition des fonctions arithmetique simple.
-/*
-void addition(pile *p){
-  if (!est_vide(p)){
-    char last_commande_2 = depiler(p);
-    if (!est_vide(p)){
-      char last_commande = depiler(p);
-      int resultat = last_commande + last_commande_2;
-      empiler(p,resultat);
-    }else{
-      empiler(p,last_commande_2);
-    }
-  }
-}
 
-void soustraction(pile *p){ 
-  if (!est_vide(p)){
-    char last_commande_2 = depiler(p);
-    if (!est_vide(p)){
-      char last_commande = depiler(p);
-      char resultat = last_commande - last_commande_2;
-      empiler(p, resultat);
-    }else{
-      empiler(p,last_commande_2);
-    }
-  }
+void addition(pile *p){
+  char last_commande_2 = depiler_int(p);
+  char last_commande = depiler_int(p);
+  int resultat = last_commande + last_commande_2;
+  empiler_int(p,resultat);
+}
+void soustraction(pile *p){
+  char last_commande_2 = depiler_int(p);
+  char last_commande = depiler_int(p);
+  int resultat = last_commande - last_commande_2;
+  empiler_int(p,resultat);
 }
 void multiplication(pile *p){
-  if (!est_vide(p)){
-    char last_commande_2 = depiler(p);
-    if (!est_vide(p)){
-      char last_commande = depiler(p);
-      char resultat = last_commande * last_commande_2;
-      empiler(p, resultat);
-    }else{
-      empiler(p,last_commande_2);
-    }
-  }
+  char last_commande_2 = depiler_int(p);
+  char last_commande = depiler_int(p);
+  int resultat = last_commande * last_commande_2;
+  empiler_int(p,resultat);
 }
-*/
 
 
 //fonction d'actions:
