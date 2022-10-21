@@ -86,54 +86,6 @@ void afficher (sequence_t* seq)
     }
 }
 
-// Definition des fonctions de pile FILO.
-/*
-pile *creer_pile(){
-  pile *p = malloc(sizeof(pile));
-  p->tete = NULL;
-  return p;
-}
-
-void vider_pile(pile *p){
-  cellule_t *cur = p->tete;
-  cellule_t *prec;
-  while (cur != NULL){
-    prec = cur;
-    cur = cur->suivant;
-    detruireCellule(prec);
-  }
-}
-
-void detruire_pile(pile *p){
-  vider_pile(p);
-  free(p);
-}
-
-int est_vide(pile *p){
-  return(p->tete == NULL);
-}
-
-char sommet(pile *p){
-  if (est_vide(p)){
-    printf("Erreur la pile est vide\n");
-    return '!';
-  }
-  else{
-    return p->tete->command; 
-  }
-}
-
-
-void afficher_pile(pile * p){
-    assert (p); // Le pointeur doit être valide 
-    cellule_t *cur;
-    cur = p->tete;
-    while(cur!=NULL){
-      printf("%d ",cur->command);
-      cur = cur->suivant;
-    }
-}
-*/
 // Definition méthodes pour act4 :
 
 cellule_double* nouvelleCelluleDouble(void)
