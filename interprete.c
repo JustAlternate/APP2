@@ -101,7 +101,10 @@ int interprete (sequence_t* seq, bool debug)
                 dernier->suivant = NULL;
                 empiler_groupe_de_commande(pile_calculette, debut->suivant);
                 break;
-
+            case '!':
+                execute(pile_calculette, current_cel);
+            case 'X':
+                echange(pile_calculette);
             default:
                 printf("Caractère spécial: '%c'\n", commande);
                 if (commande <= '9' && '0' <= commande){

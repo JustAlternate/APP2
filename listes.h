@@ -74,5 +74,7 @@ int depiler_int(pile *p);
 
 void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande);
 void condition(pile *Pile, cellule_t *Routine);
+void execute(pile *Pile, cellule_t Routine);
+void echange(pile *Pile);
 
 #endif
