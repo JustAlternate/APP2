@@ -71,7 +71,7 @@ int interprete (sequence_t* seq, bool debug)
                 break;
             case 'M':
                 empiler_int(pile_calculette,mesure(depiler_int(pile_calculette)));
-                break;/*
+                break;
             case '+':
                 addition(pile_calculette);
                 break;
@@ -80,7 +80,7 @@ int interprete (sequence_t* seq, bool debug)
                 break;
             case '*':
                 multiplication(pile_calculette);
-                break;*/
+                break;
             case '?':
                 condition(pile_calculette, current_cel);
                 break;
