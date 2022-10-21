@@ -110,7 +110,10 @@ int interprete (sequence_t* seq, bool debug)
                 echange(pile_calculette);
                 break;
             case 'C':
-                clone(pile_calculette, current_cel);
+                clone(pile_calculette);
+                break;
+            case 'B':
+                boucle(pile_calculette, current_cel);
                 break;
             default:
                 printf("Caractère spécial: '%c'\n", commande);

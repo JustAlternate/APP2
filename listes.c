@@ -372,7 +372,7 @@ void execute(pile * p, cellule_t *Routine){
   }
 }
 
-void clone(pile *p, cellule_t *Routine){
+void clone(pile *p){
   if (type_cellule_double(p->tete) == INT){
     empiler_int(p, p->tete->valeur_entier);
   }
@@ -380,4 +380,19 @@ void clone(pile *p, cellule_t *Routine){
     cellule_t *temp = copie_suite_cellule_t(p->tete->groupe_de_commande);
     empiler_groupe_de_commande(p, temp);
   }
+}
+
+void boucle(pile *p, cellule_t *Routine){
+  int i = depiler_int(p);
+  if (i <= 0){
+    return;
+  }
+  clone(p);
+  cellule_t *nouvelle_cel = nouvelleCellule();
+  nouvelle_cel->command = 'B';
+  nouvelle_cel->suivant = Routine->suivant;
+  Routine->suivant = nouvelle_cel;
+  execute(p, Routine);
+  i--;
+  empiler_int(p);
 }
