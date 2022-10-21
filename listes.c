@@ -346,8 +346,8 @@ void condition(pile *p, cellule_t *Routine){
 void echange(pile *p){ //il y a normalement au moins 2 elements
   cellule_double *cel1 = p->tete;
   p->tete = cel1->suivant;
-  cel1->suivant = cel1->suivant->suivant;
-  p->tete->suivant = cel1->suivant;
+  cel1->suivant = p->tete->suivant;
+  p->tete->suivant = cel1;
 }
 
 void execute(pile * p, cellule_t *Routine){
