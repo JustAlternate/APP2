@@ -390,7 +390,7 @@ void execute(pile * p, cellule_t *Routine){
   else{ // type_cellule_double(p->tete) == GDC
     cellule_t *premiere_cel = depiler_groupe_de_commande(p);
     cellule_t *derniere_cel = dernier_suite_cellule_t(premiere_cel);
-    dernier->suivant = Routine->suivant;
+    dernier_cel->suivant = Routine->suivant;
     Routine->suivant = premiere_cel;
   }
 }
