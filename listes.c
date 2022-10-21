@@ -392,3 +392,25 @@ void condition(pile *Pile, cellule_t *Routine){
     detruireCellule_t(choix1);
   }
 }
+
+void echange(pile *Pile){ //il y a normalement au moins 2 elements
+  cellule_double cel1 = pile->tete;
+  Pile->tete = cel1->suivant;
+  cel1->suivant = cel1->suivant->suivant;
+  Pile->tete->suivant = cel1->suivant;
+}
+
+void execute(pile * Pile, cellule_t Routine){
+  if(type_cellule_double(Pile->tete) == INT){
+    cellule_t nouvelle_cel = nouvelleCellule();
+    nouvelle_cel->command = depiler_int(Pile);
+    nouvelle_cel->suivant = Routine->suivant;
+    Routine->suivant = nouvelle_cel;
+  }
+  else{ // type_cellule_double(Pile->tete) == GDC
+    cellule_t premiere_cel = depiler_groupe_de_commande(Pile);
+    cellule_t derniere_cel = dernier_suite_cellule_t(premiere_cel);
+    dernier->suivant = Routine->suivant;
+    Routine->suivant = premiere_cel;
+  }
+}
