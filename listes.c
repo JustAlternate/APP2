@@ -432,3 +432,9 @@ void rotation(pile *p){
 
   // normalement c'est tout bon °~°
 }
+
+void ignore(pile *p){
+  suiv = p->tete->suivant;
+  detruireCelluleDouble(p->tete);
+  p->tete = suiv;
+}

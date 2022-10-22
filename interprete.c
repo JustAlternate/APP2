@@ -118,6 +118,9 @@ int interprete (sequence_t* seq, bool debug)
             case 'R':
                 rotation(pile_calculette);
                 break;
+            case 'I':
+                ignore(pile_calculette);
+                break;
             default:
                 printf("Caractère spécial: '%c'\n", commande);
                 if (commande <= '9' && '0' <= commande){
