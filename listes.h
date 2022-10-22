@@ -82,5 +82,6 @@ void execute(pile *Pile, cellule_t *Routine);
 void echange(pile *Pile);
 void clone(pile *p);
 void boucle(pile *p, cellule_t *Routine);
+void rotation(pile *p);
 
 #endif

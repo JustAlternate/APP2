@@ -398,3 +398,37 @@ void boucle(pile *p, cellule_t *Routine){
   i--;
   empiler_int(p, i);
 }
+
+void rotation(pile *p){
+  int pas = depiler_int(p);
+  int taille = depiler_int(p);
+  cellule_double *cur = p->tete; // le curseur-pointeur qui nous aide juste à trouver les autres pointeurs
+  cellule_double *ancien_premier = p->tete;
+  cellule_double *nouveau_premier;
+  cellule_double *nouveau_dernier;//nouveau dernier des 'taille' premiers
+  cellule_double *ancien_dernier; //celui que est actuellement le dernier des 'taille' premiers (le 'taille'ème)
+  cellule_double *juste_apres_ancien_dernier; //celui qui est après la rotation
+  //on fait un peu de maths:
+  pas = pas % taille; // si on fait un pas de 4 sur une liste de 3 cela reviens à faire un tour complet + un pas de 1 (on évite de faire des tours pour rien)
+  if (pas == 0){ // il n'y a pas de rotztion à faire
+    return;
+  }
+  int indice_nouveau_dernier = taille - pas;//c'est l'indice du nouveau dernier
+  for (int i = 0; i < taille-1; i++){
+    if (indice_nouveau_dernier == i){//fonctionne car pas!=taille (grace au maths ci-dessus)
+      nouveau_dernier = cur;
+      nouveau_premier = cur->suivant; //casse tout si pas == taille
+    }
+    cur = cur->suivant;
+  }
+  assert(nouveau_dernier); // normalement nouveau_dernier est différent de NULL
+  assert(nouveau_premier);
+  ancien_dernier = cur;// peut être NULL ou pas
+  juste_apres_ancien_dernier = cur->suivant;
+
+  p->tete = nouveau_premier; //on réassigne le début
+  nouveau_dernier->suivant = juste_apres_ancien_dernier; //on réassigne la fin
+  ancien_dernier->suivant = ancien_premier;// on recolle (réassigne) le milieu
+
+  // normalement c'est tout bon °~°
+}
