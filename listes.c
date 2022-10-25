@@ -433,7 +433,7 @@ void rotation(pile *p){
 }
 
 void ignore(pile *p){
-  cellule_double suiv = p->tete->suivant;
+  cellule_double *suiv = p->tete->suivant;
   detruireCelluleDouble(p->tete);
   p->tete = suiv;
 }
