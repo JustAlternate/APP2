@@ -410,12 +410,11 @@ void rotation(pile *p){
   cellule_double *juste_apres_ancien_dernier; //celui qui est après la rotation
   //on fait un peu de maths:
   pas = pas % taille; // si on fait un pas de 4 sur une liste de 3 cela reviens à faire un tour complet + un pas de 1 (on évite de faire des tours pour rien)
-  if (pas == 0){ // il n'y a pas de rotztion à faire
+  if (pas == 0 || taille == 0 || taille == 1){ // il n'y a pas de rotztion à faire
     return;
   }
-  int indice_nouveau_dernier = taille - pas;//c'est l'indice du nouveau dernier
-  for (int i = 0; i < taille-1; i++){
-    if (indice_nouveau_dernier == i){//fonctionne car pas!=taille (grace au maths ci-dessus)
+  for (int compteur = 0; compteur < taille-1; compteur++){
+    if (compteur == taille - pas - 1){//fonctionne car pas!=taille (grace au maths ci-dessus)
       nouveau_dernier = cur;
       nouveau_premier = cur->suivant; //casse tout si pas == taille
     }
