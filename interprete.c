@@ -132,15 +132,15 @@ int interprete (sequence_t* seq, bool debug)
                 break;
         }
         //printf("Pile : ");
-        afficher_pile_double(pile_calculette);
+        //afficher_pile_double(pile_calculette);
         seq->tete = current_cel->suivant;
         free(current_cel);
         current_cel = seq->tete;
         // ce serait bien de free la précédente cel
         /* Affichage pour faciliter le debug */
-        afficherCarte();
+        //afficherCarte();
         //printf ("Programme:");
-        afficher(seq);
+        //afficher(seq);
         //printf ("\n");
         if (debug) stop();
     }
