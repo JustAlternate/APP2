@@ -46,7 +46,7 @@ int interprete (sequence_t* seq, bool debug)
     pile *pile_calculette = creer_pile();
 
     while (current_cel != NULL) { 
-        printf("%c\n",current_cel->command);
+        //printf("%c\n",current_cel->command);
         commande = current_cel->command;
         switch (commande) {
             case 'A':
@@ -102,9 +102,9 @@ int interprete (sequence_t* seq, bool debug)
                 empiler_groupe_de_commande(pile_calculette, debut->suivant);
                 break;
             case '!':
-                printf("entree d'exec\n");
+                //printf("entree d'exec\n");
                 execute(pile_calculette, current_cel);
-                printf("sortie d'exec\n");
+                //printf("sortie d'exec\n");
                 break;
             case 'X':
                 echange(pile_calculette);
@@ -125,13 +125,13 @@ int interprete (sequence_t* seq, bool debug)
                 zinversion(pile_calculette);
                 break;
             default:
-                printf("Caractère spécial: '%c'\n", commande);
+                //printf("Caractère spécial: '%c'\n", commande);
                 if (commande <= '9' && '0' <= commande){
                   empiler_int(pile_calculette,(commande-'0'));
                 }
                 break;
         }
-        printf("Pile : ");
+        //printf("Pile : ");
         afficher_pile_double(pile_calculette);
         seq->tete = current_cel->suivant;
         free(current_cel);
@@ -139,9 +139,9 @@ int interprete (sequence_t* seq, bool debug)
         // ce serait bien de free la précédente cel
         /* Affichage pour faciliter le debug */
         afficherCarte();
-        printf ("Programme:");
+        //printf ("Programme:");
         afficher(seq);
-        printf ("\n");
+        //printf ("\n");
         if (debug) stop();
     }
     
