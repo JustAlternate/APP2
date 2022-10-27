@@ -70,7 +70,9 @@ void conversion (char *texte, sequence_t *seq)
   vider_liste_t(seq);
   int i = 0;
   while(texte[i]!='\0'){
-    transform(&texte[i],seq);
+    if(texte[i] != ' '){
+      transform(&texte[i],seq);
+    }
     i++;
   }
 }
