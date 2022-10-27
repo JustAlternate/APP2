@@ -68,7 +68,7 @@ void transform(char *c, sequence_t *seq){
 void conversion (char *texte, sequence_t *seq)
 {
   vider_liste_t(seq);
-  if texte[0] != '\0'{
+  if (texte[0] != '\0'){
     seq->tete = texte[0];
     int i = 1;// on a déja ajouté le premier caractere
 
