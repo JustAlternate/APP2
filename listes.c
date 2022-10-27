@@ -95,7 +95,7 @@ cellule_double* nouvelleCelluleDouble(void)
     cellule_double *cel = malloc(sizeof(cellule_double)); 
     cel->valeur_entier = -1;
     cel->groupe_de_commande = NULL;
-    cel->type = INT
+    cel->type = INT;
     return cel;
 }
 
@@ -158,7 +158,7 @@ void empiler_int(pile *p, int x){
 
 void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande){ // Passer en argument un groupe de commande de la forme A->G->D->A->NULL
   cellule_double *cel = nouvelleCelluleDouble();
-  cel->type = GDC
+  cel->type = GDC;
   cel->groupe_de_commande = groupe_de_commande;
   cel->suivant = p->tete;
   p->tete = cel;
@@ -241,7 +241,7 @@ void afficher_pile_double(pile * p){
     assert (p);
     cellule_double *cur;
     cur = p->tete;
-    while(cur == INT){
+    while(cur->type == INT){
       if (cur->groupe_de_commande == NULL){
         printf("%d ",cur->valeur_entier);
       }else{
