@@ -69,16 +69,17 @@ void conversion (char *texte, sequence_t *seq)
 {
   vider_liste_t(seq);
   if (texte[0] != '\0'){
-    seq->tete = texte[0];
+    cellule_t *cur;
+    cur->command = texte[0];
+    seq->tete = cur;
     int i = 1;// on a déja ajouté le premier caractere
 
-    sequence_t *cur = seq;
-    sequence_t *temp;
+    cellule_t *temp;
     while(texte[i]!='\0'){
       if(texte[i] != ' '){
-        cellule_t *temp = nouvelleCellule();
-        temp->command = texte[i]
-        cur->suivant = temp 
+        temp = nouvelleCellule();
+        temp->command = texte[i] cur->suivant = temp;
+        cur = temp;
       }
       i++;
     }
