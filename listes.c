@@ -81,7 +81,7 @@ void afficher (sequence_t* seq)
     cellule_t *cur;
     cur = seq->tete;
     while(cur!=NULL){
-      printf("%c ",cur->command);
+      //printf("%c ",cur->command);
       cur = cur->suivant;
     }
 }
@@ -167,32 +167,32 @@ void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande){ // Pass
 }
 
 int depiler_int(pile *p){
-  printf("pile apres depilage (GDC) : ");
+  //printf("pile apres depilage (GDC) : ");
   afficher_pile_double(p);
-  printf("\n");
+  //printf("\n");
   cellule_double *cel = p->tete;
   int resultat = cel->valeur_entier;
 
   p->tete = p->tete->suivant;
   free(cel);
-  printf("pile apres depilage (GDC) : ");
+  //printf("pile apres depilage (GDC) : ");
   afficher_pile_double(p);
-  printf("\n");
+  //printf("\n");
   return resultat;
 }
 
 cellule_t *depiler_groupe_de_commande(pile *p){
-  printf("pile avant depilage (GDC) : ");
+  //printf("pile avant depilage (GDC) : ");
   afficher_pile_double(p);
-  printf("\n");
+  //printf("\n");
   cellule_double *cel = p->tete;
   cellule_t *resultat = cel->groupe_de_commande;
 
   p->tete = p->tete->suivant;
   free(cel);
-  printf("pile apres depilage (GDC) : ");
+  //printf("pile apres depilage (GDC) : ");
   afficher_pile_double(p);
-  printf("\n");
+  //printf("\n");
   return resultat;
 }
 
@@ -324,9 +324,9 @@ void condition(pile *p, cellule_t *Routine){
   cellule_t *der;
   if (! booleen)
   {//on met choix1 dans la routine et on free choix2
-    printf("le premier : %c \n", choix1->command);
+    //printf("le premier : %c \n", choix1->command);
     der = dernier_suite_cellule_t(choix1); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
-    printf("le dernier est: %c \n", der->command);
+    //printf("le dernier est: %c \n", der->command);
     der->suivant = Routine->suivant;
     Routine->suivant = choix1;
     detruireCellule_t(choix2);
@@ -335,9 +335,9 @@ void condition(pile *p, cellule_t *Routine){
   else
   {//et inversement
     der = dernier_suite_cellule_t(choix2); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
-    printf("le premier : %c \n", choix1->command);
+    //printf("le premier : %c \n", choix1->command);
     der->suivant = Routine->suivant;
-    printf("le dernier est: %c \n", der->command);
+    //printf("le dernier est: %c \n", der->command);
     Routine->suivant = choix2;
     detruireCellule_t(choix1);
   }
@@ -352,23 +352,23 @@ void echange(pile *p){ //il y a normalement au moins 2 elements
 
 void execute(pile * p, cellule_t *Routine){
   if(type_cellule_double(p->tete) == INT){
-    printf("choix int\n");
+    //printf("choix int\n");
     cellule_t *nouvelle_cel = nouvelleCellule();
     nouvelle_cel->command = depiler_int(p);
     nouvelle_cel->suivant = Routine->suivant;
     Routine->suivant = nouvelle_cel;
   }
   else{ // type_cellule_double(p->tete) == GDC
-    printf("choix int\n");
-    printf("1\n");
+    //printf("choix int\n");
+    //printf("1\n");
     cellule_t *premiere_cel = depiler_groupe_de_commande(p);
-    printf("2\n");
+    //printf("2\n");
     cellule_t *derniere_cel = dernier_suite_cellule_t(premiere_cel);
-    printf("3\n");
+    //printf("3\n");
     derniere_cel->suivant = Routine->suivant;
-    printf("4\n");
+    //printf("4\n");
     Routine->suivant = premiere_cel;
-    printf("5\n");
+    //printf("5\n");
   }
 }
 
