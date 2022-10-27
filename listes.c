@@ -95,6 +95,7 @@ cellule_double* nouvelleCelluleDouble(void)
     cellule_double *cel = malloc(sizeof(cellule_double)); 
     cel->valeur_entier = -1;
     cel->groupe_de_commande = NULL;
+    cel->type = INT
     return cel;
 }
 
@@ -121,7 +122,7 @@ void detruireCellule_t(cellule_t *cur){
 
 void detruireCelluleDouble (cellule_double* cel)
 {
-  if (cel->groupe_de_commande != NULL){
+  if (cel->type == GDC){
     detruireGroupeDeCommande(cel);
   }
   free(cel);
@@ -148,21 +149,16 @@ void detruire_pile_double(pile *p){
 
 void empiler_int(pile *p, int x){
   cellule_double *cel = nouvelleCelluleDouble();
+  cel->type = INT;
   cel->valeur_entier = x;
-  cel->groupe_de_commande = NULL;
   cel->suivant = p->tete;
   p->tete = cel;
 }
 
 
 void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande){ // Passer en argument un groupe de commande de la forme A->G->D->A->NULL
-  if (groupe_de_commande == NULL){
-    cellule_t *cel_espace = nouvelleCellule();
-    cel_espace->command = ' ';
-    cel_espace->suivant = NULL;
-    groupe_de_commande = cel_espace;
-  }
   cellule_double *cel = nouvelleCelluleDouble();
+  cel->type = GDC
   cel->groupe_de_commande = groupe_de_commande;
   cel->suivant = p->tete;
   p->tete = cel;
@@ -198,7 +194,7 @@ cellule_t *depiler_groupe_de_commande(pile *p){
   return resultat;
 }
 
-
+/*
 int depiler(pile *p, int *valeur_entier, cellule_t **groupe_de_commande){
   if (p->tete == NULL){
     return -1;
@@ -221,6 +217,7 @@ int depiler(pile *p, int *valeur_entier, cellule_t **groupe_de_commande){
   free(cel);
   return resultat;
 }
+*/
 
 cellule_t *dernier_suite_cellule_t(cellule_t *cur){
   if (cur == NULL) {
@@ -244,7 +241,7 @@ void afficher_pile_double(pile * p){
     assert (p);
     cellule_double *cur;
     cur = p->tete;
-    while(cur!=NULL){
+    while(cur == INT){
       if (cur->groupe_de_commande == NULL){
         printf("%d ",cur->valeur_entier);
       }else{
@@ -265,6 +262,9 @@ int type_cellule_double(cellule_double *cel_db){
 
 cellule_t *copie_suite_cellule_t(cellule_t *cel){
   // normalement il y a au moins une cellule à copier
+  if (cel == NULL){
+    return NULL;
+  }
   cellule_t *premiere_copie = nouvelleCellule();
   premiere_copie->command = cel->command;
   cellule_t *cur_copie = premiere_copie;
@@ -304,18 +304,18 @@ void multiplication(pile *p){
 
 //fonction d'actions:
 void condition(pile *p, cellule_t *Routine){
-  if (p->tete == NULL){ // On va verifie que la pile contient bien 3 éléments (du bon type lol)
+  /*if (p->tete == NULL){ // On va verifie que la pile contient bien 3 éléments (du bon type lol)
     return;
   }
-  if (p->tete->suivant == NULL || type_cellule_double(p->tete) == INT){
+  if (p->tete->suivant == NULL || p->tete->type == INT){
     return ;
   }
-  if (p->tete->suivant->suivant == NULL || type_cellule_double(p->tete->suivant) == INT){
+  if (p->tete->suivant->suivant == NULL || p->tete->suivant->type == INT){
     return ;
   }
-  if (type_cellule_double(p->tete->suivant->suivant)==GDC){
+  if (p->tete->suivant->suivant->type==GDC){
     return ;
-  }
+  }*/
   //tous est bon lancer la fonction:
   int booleen;
   cellule_t *choix1 = NULL;
@@ -326,22 +326,26 @@ void condition(pile *p, cellule_t *Routine){
   cellule_t *der;
   if (! booleen)
   {//on met choix1 dans la routine et on free choix2
-    //printf("le premier : %c \n", choix1->command);
-    der = dernier_suite_cellule_t(choix1); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
-    //printf("le dernier est: %c \n", der->command);
-    der->suivant = Routine->suivant;
-    Routine->suivant = choix1;
-    detruireCellule_t(choix2);
+    if (choix1 != NULL){
+      der = dernier_suite_cellule_t(choix1); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
+      //printf("le dernier est: %c \n", der->command);
+      der->suivant = Routine->suivant;
+      Routine->suivant = choix1;
+      detruireCellule_t(choix2);
+    }
     return;
   }
   else
   {//et inversement
-    der = dernier_suite_cellule_t(choix2); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
-    //printf("le premier : %c \n", choix1->command);
-    der->suivant = Routine->suivant;
-    //printf("le dernier est: %c \n", der->command);
-    Routine->suivant = choix2;
-    detruireCellule_t(choix1);
+    if(choix2 != NULL){
+      der = dernier_suite_cellule_t(choix2); // implémentation de la la fonction "sequance_t *sernier(sequence_t *prems)" à faire
+      //printf("le premier : %c \n", choix1->command);
+      der->suivant = Routine->suivant;
+      //printf("le dernier est: %c \n", der->command);
+      Routine->suivant = choix2;
+      detruireCellule_t(choix1);
+    }
+    return;
   }
 }
 
@@ -353,7 +357,7 @@ void echange(pile *p){ //il y a normalement au moins 2 elements
 }
 
 void execute(pile * p, cellule_t *Routine){
-  if(type_cellule_double(p->tete) == INT){
+  if(p->tete->type == INT){
     //printf("choix int\n");
     cellule_t *nouvelle_cel = nouvelleCellule();
     nouvelle_cel->command = depiler_int(p);
@@ -367,15 +371,17 @@ void execute(pile * p, cellule_t *Routine){
     //printf("2\n");
     cellule_t *derniere_cel = dernier_suite_cellule_t(premiere_cel);
     //printf("3\n");
-    derniere_cel->suivant = Routine->suivant;
-    //printf("4\n");
-    Routine->suivant = premiere_cel;
-    //printf("5\n");
+    if(premiere_cel != NULL){
+      derniere_cel->suivant = Routine->suivant;
+      //printf("4\n");
+      Routine->suivant = premiere_cel;
+      //printf("5\n");
+    }
   }
 }
 
 void clone(pile *p){
-  if (type_cellule_double(p->tete) == INT){
+  if (p->tete->type == INT){
     empiler_int(p, p->tete->valeur_entier);
   }
   else{//type_cellule_double(p->tete) == GDC
@@ -383,7 +389,7 @@ void clone(pile *p){
     empiler_groupe_de_commande(p, temp);
   }
 }
-
+// je me suis arreter là
 void boucle(pile *p, cellule_t *Routine){
   int i = depiler_int(p);
   if (i <= 0){
