@@ -121,6 +121,9 @@ int interprete (sequence_t* seq, bool debug)
             case 'I':
                 ignore(pile_calculette);
                 break;
+            case 'Z':
+                zinversion(pile_calculette);
+                break;
             default:
                 printf("Caractère spécial: '%c'\n", commande);
                 if (commande <= '9' && '0' <= commande){

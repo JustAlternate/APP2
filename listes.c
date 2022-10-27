@@ -437,3 +437,26 @@ void ignore(pile *p){
   detruireCelluleDouble(p->tete);
   p->tete = suiv;
 }
+
+void zinversion(pile *p){
+    cellule_double *a;
+    cellule_double *b;
+    cellule_double *c;
+    if (p->tete == NULL){return;}
+    if (p->tete->suivant == NULL){return;}
+    a = p->tete;
+    b = a->suivant;
+    c = b->suivant;
+    a->suivant = NULL;
+    while(c!=NULL){
+        b->suivant = a;
+        a = b;
+        b = c;
+        c = c->suivant;
+    }
+    b->suivant = a;
+    p->tete = b;
+    /* votre code ici */
+    return;
+
+}

@@ -84,5 +84,6 @@ void clone(pile *p);
 void boucle(pile *p, cellule_t *Routine);
 void rotation(pile *p);
 void ignore(pile *p);
+void zinversion(pile *p);
 
 #endif
