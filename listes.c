@@ -78,7 +78,8 @@ void conversion (char *texte, sequence_t *seq)
     while(texte[i]!='\0'){
       if(texte[i] != ' '){
         temp = nouvelleCellule();
-        temp->command = texte[i] cur->suivant = temp;
+        temp->command = texte[i];
+        cur->suivant = temp;
         cur = temp;
       }
       i++;
