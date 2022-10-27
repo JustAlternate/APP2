@@ -170,7 +170,7 @@ void empiler_groupe_de_commande(pile *p, cellule_t *groupe_de_commande){ // Pass
 
 int depiler_int(pile *p){
   //printf("pile apres depilage (GDC) : ");
-  afficher_pile_double(p);
+  //afficher_pile_double(p);
   //printf("\n");
   cellule_double *cel = p->tete;
   int resultat = cel->valeur_entier;
@@ -178,14 +178,14 @@ int depiler_int(pile *p){
   p->tete = p->tete->suivant;
   free(cel);
   //printf("pile apres depilage (GDC) : ");
-  afficher_pile_double(p);
+  //afficher_pile_double(p);
   //printf("\n");
   return resultat;
 }
 
 cellule_t *depiler_groupe_de_commande(pile *p){
   //printf("pile avant depilage (GDC) : ");
-  afficher_pile_double(p);
+  //afficher_pile_double(p);
   //printf("\n");
   cellule_double *cel = p->tete;
   cellule_t *resultat = cel->groupe_de_commande;
@@ -193,7 +193,7 @@ cellule_t *depiler_groupe_de_commande(pile *p){
   p->tete = p->tete->suivant;
   free(cel);
   //printf("pile apres depilage (GDC) : ");
-  afficher_pile_double(p);
+  //afficher_pile_double(p);
   //printf("\n");
   return resultat;
 }
