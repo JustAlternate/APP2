@@ -115,17 +115,22 @@ int interprete (sequence_t* seq, bool debug)
                 }
                 break;
         }
-        //printf("Pile : ");
-        //afficher_pile_double(pile_calculette);
+        if (!silent_mode){
+            printf("Pile : ");
+            afficher_pile_double(pile_calculette);
+        
+        }
         seq->tete = current_cel->suivant;
         free(current_cel); // current_cel->groupe_de_command est sois déjà free sois déjà utilisé
         current_cel = seq->tete;
         // ce serait bien de free la précédente cel
         /* Affichage pour faciliter le debug */
-        //afficherCarte();
-        //printf ("Programme:");
-        //afficher(seq);
-        //printf ("\n");
+        if (!silent_mode){
+            afficherCarte();
+            printf ("Programme:");
+            afficher(seq);
+            printf ("\n");
+        }
         if (debug) stop();
     }
     
