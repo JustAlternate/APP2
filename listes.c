@@ -88,13 +88,14 @@ void transform(char *c, sequence_t *seq){
 int sous_conversion (char *texte, cellule_t *seq, int i)
 {
   cellule_t *cur = nouvelleCellule();
-  cur->command = texte[0];
+  cur->command = texte[i];
   seq->groupe_de_commande = cur;
   i++;// on a déja ajouté le premier caractere
 
   cellule_t *temp;
   while(texte[i]!='}'){
     if (texte[i] == '{'){
+      printf("groupe de commande rencntré\n");
       i++;
       temp = nouvelleCellule();
       temp->type = GDC;
@@ -124,7 +125,9 @@ void conversion (char *texte, sequence_t *seq)
     int i = 1;// on a déja ajouté le premier caractere
 
     cellule_t *temp;
-    while(texte[i]!='\0'){
+    do
+    {
+      printf("groupe de commande rencntré\n");
       if (texte[i] == '{'){
         i++;
         temp = nouvelleCellule();
@@ -141,7 +144,7 @@ void conversion (char *texte, sequence_t *seq)
         cur = temp;
       }}
       i++;
-    }
+    } while (texte[i] != '\0');
   }
 }
 
