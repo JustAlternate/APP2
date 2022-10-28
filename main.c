@@ -49,12 +49,11 @@ void launch (bool debug, int carte_num)
 
         if (! silent_mode) {
             printf ("Lancement du test...\n");
-            printf ("\tProgramme: %s\n", program);
+            printf ("\tProgramme: %s.\n", program);
             afficherCarte ();
         }
 
         /* curiosity_reset (cur); */
-
         conversion(program,&prog_seq);
 
         switch (interprete (&prog_seq, debug)) { //interprete le programme lu jusqu'a la fin de son execution 
