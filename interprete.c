@@ -84,22 +84,8 @@ int interprete (sequence_t* seq, bool debug)
             case '?':
                 condition(pile_calculette, current_cel);
                 break;
-            case '{':
-                debut = current_cel; // attentio deb est peut être NULL
-                compteur = 0; //pour les if imbriqués
-                while(current_cel->suivant->command != '}' || compteur != 0){ // on part du principe que le groupe de commande a une fin
-                    current_cel = current_cel->suivant;
-                    if (current_cel->command == '{'){
-                        compteur++;
-                    }
-                    if (current_cel->command == '}'){
-                        compteur--;
-                    }
-                }
-                dernier = current_cel;
-                current_cel = current_cel->suivant;
-                dernier->suivant = NULL;
-                empiler_groupe_de_commande(pile_calculette, debut->suivant);
+            case '{':// ça se peut que je casse tout
+                empiler_groupe_de_commande(pile_calculette, current_cel->groupe_de_commande);
                 break;
             case '!':
                 //printf("entree d'exec\n");
@@ -134,7 +120,7 @@ int interprete (sequence_t* seq, bool debug)
         //printf("Pile : ");
         //afficher_pile_double(pile_calculette);
         seq->tete = current_cel->suivant;
-        free(current_cel);
+        free(current_cel); // current_cel->groupe_de_command est sois déjà free sois déjà utilisé
         current_cel = seq->tete;
         // ce serait bien de free la précédente cel
         /* Affichage pour faciliter le debug */

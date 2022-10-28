@@ -9,11 +9,12 @@
 
 #define GDC 0 //est une groupe de commande.
 #define INT 1
+#define CHAR 2
 
 /*
- *  Auteur(s) :
- *  Date :
- *  Suivi des Modifications :
+ *  Auteur(s) : Loïc WEBER et Lord Isak PASCAL
+ *  Date : 28/10/2022
+ *  Suivi des Modifications : ?
  *
  */
 
@@ -24,14 +25,20 @@ bool silent_mode = false;
 cellule_t* nouvelleCellule (void)
 {
     cellule_t *cel = malloc(sizeof(cellule_t));
+    cel->groupe_de_commande = NULL;
+    cel->type = CHAR;
     cel->suivant = NULL;
     return cel;
 }
 
 void detruireCellule (cellule_t* cel)
 {
+    if (cel->type == GDC){
+      detruireGroupeDeCommandeCellule_t(cel);
+    }
     free(cel);
 }
+
 void vider_liste_t(sequence_t *seq){
   if (seq->tete == NULL){
     return;
@@ -76,15 +83,54 @@ void conversion (char *texte, sequence_t *seq)
 
     cellule_t *temp;
     while(texte[i]!='\0'){
-      if(texte[i] != ' '){
+      if (texte[i] == '{'){
+        i++;
+        temp = nouvelleCellule();
+        temp->type = GDC;
+        temp->command = '{';
+        i = sous_conversion(texte, temp, i); // on met la sous-chaine de commande dans la 'commande'
+        cur->suivant = temp;
+        cur = temp;
+      }
+      else{if(texte[i] != ' '){
         temp = nouvelleCellule();
         temp->command = texte[i];
         cur->suivant = temp;
         cur = temp;
-      }
+      }}
       i++;
     }
   }
+}
+
+
+void sous_conversion (char *texte, cellule_t *seq, int i)
+{
+  cellule_t *cur = nouvelleCellule();
+  cur->command = texte[0];
+  seq->groupe_de_commande = cur;
+  int i++;// on a déja ajouté le premier caractere
+
+  cellule_t *temp;
+  while(texte[i]!='}'){
+    if (texte[i] == '{'){
+      i++;
+      temp = nouvelleCellule();
+      temp->type = GDC;
+      temp->command = '{';
+      i = sous_conversion(texte, temp, i); // on met la sous-chaine de commande dans la 'commande'
+      cur->suivant = temp;
+      cur = temp;
+    }
+    else{if(texte[i] != ' '){
+      temp = nouvelleCellule();
+      temp->command = texte[i];
+      cur->suivant = temp;
+      cur = temp;
+    }}
+    i++;
+  }
+  return i;// on retourne l'emplacement de l'acolade fermante
 }
 
 void afficher (sequence_t* seq)
@@ -92,6 +138,19 @@ void afficher (sequence_t* seq)
     assert (seq); /* Le pointeur doit être valide */
     cellule_t *cur;
     cur = seq->tete;
+    while(cur!=NULL){
+      if (cur->type == GDC){
+        afficher_suite_cellule_t()
+      }
+      //printf("%c ",cur->command);
+      cur = cur->suivant;
+    }
+}
+void afficher_suite_cellule_t (cellule_t* cel)
+{
+    assert (cel); /* Le pointeur doit être valide */
+    cellule_t *cur;
+    cur = cel->groupe_de_commande;
     while(cur!=NULL){
       //printf("%c ",cur->command);
       cur = cur->suivant;
@@ -115,6 +174,22 @@ void detruireGroupeDeCommande(cellule_double *cel_db){
   while (cur != NULL){
     prec = cur;
     cur = cur->suivant;
+    if (prec->type == GDC){
+      detruireGroupeDeCommandeCellule_t(prec);
+    }
+    free(prec);
+  }
+}
+
+void detruireGroupeDeCommandeCellule_t(cellule_t *cel_t){
+  cellule_t *prec;
+  cellule_t *cur = cel_t->groupe_de_commande;
+  while (cur != NULL){
+    prec = cur;
+    cur = cur->suivant;
+    if (prec->type == GDC){
+      detruireGroupeDeCommandeCellule_t(prec);
+    }
     free(prec);
   }
 }
@@ -126,6 +201,9 @@ void detruireCellule_t(cellule_t *cur){
   {
     prec = cur;
     cur = cur->suivant;
+    if (prec->type == GDC){
+      detruireGroupeDeCommandeCellule_t(prec);
+    }
     free(prec);
   }
 }
@@ -263,12 +341,6 @@ void afficher_pile_double(pile * p){
     }
 }
 
-int type_cellule_double(cellule_double *cel_db){
-  if(cel_db->groupe_de_commande == NULL){
-    return INT;
-  }
-  return GDC; 
-}
 
 cellule_t *copie_suite_cellule_t(cellule_t *cel){
   // normalement il y a au moins une cellule à copier
@@ -276,13 +348,32 @@ cellule_t *copie_suite_cellule_t(cellule_t *cel){
     return NULL;
   }
   cellule_t *premiere_copie = nouvelleCellule();
-  premiere_copie->command = cel->command;
+
+  //on initialise la première copie
+  if (cel->type == GDC){
+    premiere_copie->type = GDC;
+    premiere_copie->command = '{'
+    premiere_copie->groupe_de_commande = copie_suite_cellule_t(cel->groupe_de_commande);
+  }
+  else{
+    premiere_copie->type = CHAR;
+    premiere_copie->command = cel->command;
+  }
+
   cellule_t *cur_copie = premiere_copie;
   cellule_t *temp;
   while (cel->suivant !=NULL){
     cel = cel->suivant;
     temp = nouvelleCellule();
-    temp->command = cel->command;
+    if (cel->type == GDC){//on copie le sous-groupe de commande
+      temp->type = GDC;
+      temp->command = '{';
+      temp->groupe_de_commande = copie_suite_cellule_t(cel->groupe_de_commande);
+    }
+    else{
+      temp->type = CHAR;
+      temp->command = cel->command;
+    }
     cur_copie->suivant = temp;
     cur_copie = cur_copie->suivant;
   }
@@ -402,9 +493,9 @@ void clone(pile *p){
 // je me suis arreter là
 void boucle(pile *p, cellule_t *Routine){
   int i = depiler_int(p);
-  if (i <= 0){
+  if (i <= 0){// on arrête la boucle et on detruit ce qui est censé boucler
     cellule_t *cel_a_detruire = depiler_groupe_de_commande(p);
-    detruireCellule_t(cel_a_detruire);
+    detruireCellule_t(cel_a_detruire); // détruire la cellule et ses suivantes / ses sous-groupes
     return;
   }
   clone(p);
@@ -456,7 +547,7 @@ void ignore(pile *p){
   p->tete = suiv;
 }
 
-void zinversion(pile *p){
+void zinversion(pile *p){ // piqué à l'exercice de renversement de liste chainée de la semaine de transition.
     cellule_double *a;
     cellule_double *b;
     cellule_double *c;

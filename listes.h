@@ -27,7 +27,9 @@ extern bool silent_mode;
 
 typedef struct cellule {
 
-    char command;
+    int type;
+    char command; // si le type et GDC alors command = '{'
+    struct cellule *groupe_de_commande;
     struct cellule *suivant;
 
 } cellule_t;
