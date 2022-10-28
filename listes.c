@@ -87,13 +87,12 @@ void transform(char *c, sequence_t *seq){
 
 int sous_conversion (char *texte, cellule_t *seq, int i)
 {
-  cellule_t *cur = nouvelleCellule();
-  cur->command = texte[i];
-  seq->groupe_de_commande = cur;
+  cellule_t *deb = nouvelleCellule();
+  cellule_t *cur = deb;
   i++;// on a déja ajouté le premier caractere
 
   cellule_t *temp;
-  while(texte[i]!='}'){
+  do{
     if (texte[i] == '{'){
       printf("groupe de commande rencntré\n");
       i++;
@@ -111,7 +110,7 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
       cur = temp;
     }}
     i++;
-  }
+  } while (texte[i] != '}');
   return i;// on retourne l'emplacement de l'acolade fermante
 }
 
