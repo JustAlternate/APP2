@@ -93,9 +93,20 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
     return i + 1;
   }
   cellule_t *cur = nouvelleCellule();
-  cur->command = texte[i];
   seq->groupe_de_commande = cur;
-  i++;// on a déja ajouté le premier caractere
+  on initialise
+  if (texte[i] == '{'){
+    printf("groupe de commande rencntré\n");
+    i++;
+    cur->type = GDC;
+    cur->command = '{';
+    i = sous_conversion(texte, temp, i); // on met la sous-chaine de commande dans la 'commande'
+  }
+  else{
+    cur = nouvelleCellule();
+    cur->command = texte[i];
+  }
+  i++;
 
   cellule_t *temp;
   while(texte[i]!='}'){
