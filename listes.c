@@ -162,9 +162,9 @@ void afficher_suite_cellule_t (cellule_t* cel)
 void afficher_suites_de_cellule_t(cellule_t *cel){
   while(cel !=NULL){
     if (cel->type == GDC){
-      printf("{");
+      printf("{ ");
       afficher_suites_de_cellule_t(cel->groupe_de_commande);
-      printf("}");
+      printf("} ");
     }
     else
     {
@@ -178,14 +178,17 @@ void afficher_suites_de_cellule_t(cellule_t *cel){
 void afficher (sequence_t* seq)
 {
     assert (seq); /* Le pointeur doit être valide */
-    cellule_t *cur;
+    /*cellule_t *cur;
     cur = seq->tete;
     while(cur!=NULL){
       if (cur->type == GDC){
         afficher_suites_de_cellule_t(cur->groupe_de_commande);
       }
+      
       printf("%c ",cur->command);
       cur = cur->suivant;
+    */
+    afficher_suites_de_cellule_t(seq->tete);
     }
 }
 // Definition méthodes pour act4 :
