@@ -134,11 +134,18 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
 void conversion (char *texte, sequence_t *seq)
 {
   vider_liste_t(seq);
-  if (texte[0] != '\0'){
+  int i = 1;// on ajoute le premier caractere a part
+  if (texte[0] != '\0'){ // cas spécial du premier caractere
     cellule_t *cur = nouvelleCellule();
-    cur->command = texte[0];
+    if (texte[0] != '{'){//caractere normal
+      cur->type = CHAR;
+      cur->command = texte[0];
+    }
+    else{//chaine de commande
+      cur->type = GDC;
+      i = sous_conversion(texte, cur, i);
+    }
     seq->tete = cur;
-    int i = 1;// on a déja ajouté le premier caractere
 
     cellule_t *temp;
     do
