@@ -31,6 +31,19 @@ cellule_t* nouvelleCellule (void)
     return cel;
 }
 
+void detruireGroupeDeCommandeCellule_t(cellule_t *cel_t){
+  cellule_t *prec;
+  cellule_t *cur = cel_t->groupe_de_commande;
+  while (cur != NULL){
+    prec = cur;
+    cur = cur->suivant;
+    if (prec->type == GDC){
+      detruireGroupeDeCommandeCellule_t(prec);
+    }
+    free(prec);
+  }
+}
+
 void detruireCellule (cellule_t* cel)
 {
     if (cel->type == GDC){
@@ -72,6 +85,35 @@ void transform(char *c, sequence_t *seq){
   cur->suivant = cel;
 }
 
+void sous_conversion (char *texte, cellule_t *seq, int i)
+{
+  cellule_t *cur = nouvelleCellule();
+  cur->command = texte[0];
+  seq->groupe_de_commande = cur;
+  i++;// on a déja ajouté le premier caractere
+
+  cellule_t *temp;
+  while(texte[i]!='}'){
+    if (texte[i] == '{'){
+      i++;
+      temp = nouvelleCellule();
+      temp->type = GDC;
+      temp->command = '{';
+      i = sous_conversion(texte, temp, i); // on met la sous-chaine de commande dans la 'commande'
+      cur->suivant = temp;
+      cur = temp;
+    }
+    else{if(texte[i] != ' '){
+      temp = nouvelleCellule();
+      temp->command = texte[i];
+      cur->suivant = temp;
+      cur = temp;
+    }}
+    i++;
+  }
+  return i;// on retourne l'emplacement de l'acolade fermante
+}
+
 void conversion (char *texte, sequence_t *seq)
 {
   vider_liste_t(seq);
@@ -104,34 +146,6 @@ void conversion (char *texte, sequence_t *seq)
 }
 
 
-void sous_conversion (char *texte, cellule_t *seq, int i)
-{
-  cellule_t *cur = nouvelleCellule();
-  cur->command = texte[0];
-  seq->groupe_de_commande = cur;
-  int i++;// on a déja ajouté le premier caractere
-
-  cellule_t *temp;
-  while(texte[i]!='}'){
-    if (texte[i] == '{'){
-      i++;
-      temp = nouvelleCellule();
-      temp->type = GDC;
-      temp->command = '{';
-      i = sous_conversion(texte, temp, i); // on met la sous-chaine de commande dans la 'commande'
-      cur->suivant = temp;
-      cur = temp;
-    }
-    else{if(texte[i] != ' '){
-      temp = nouvelleCellule();
-      temp->command = texte[i];
-      cur->suivant = temp;
-      cur = temp;
-    }}
-    i++;
-  }
-  return i;// on retourne l'emplacement de l'acolade fermante
-}
 
 void afficher (sequence_t* seq)
 {
@@ -140,7 +154,7 @@ void afficher (sequence_t* seq)
     cur = seq->tete;
     while(cur!=NULL){
       if (cur->type == GDC){
-        afficher_suite_cellule_t()
+        afficher_suite_cellule_t();
       }
       //printf("%c ",cur->command);
       cur = cur->suivant;
@@ -181,18 +195,7 @@ void detruireGroupeDeCommande(cellule_double *cel_db){
   }
 }
 
-void detruireGroupeDeCommandeCellule_t(cellule_t *cel_t){
-  cellule_t *prec;
-  cellule_t *cur = cel_t->groupe_de_commande;
-  while (cur != NULL){
-    prec = cur;
-    cur = cur->suivant;
-    if (prec->type == GDC){
-      detruireGroupeDeCommandeCellule_t(prec);
-    }
-    free(prec);
-  }
-}
+
 
 // version 2 pas sur de l'implementation
 void detruireCellule_t(cellule_t *cur){
@@ -352,7 +355,7 @@ cellule_t *copie_suite_cellule_t(cellule_t *cel){
   //on initialise la première copie
   if (cel->type == GDC){
     premiere_copie->type = GDC;
-    premiere_copie->command = '{'
+    premiere_copie->command = '{';
     premiere_copie->groupe_de_commande = copie_suite_cellule_t(cel->groupe_de_commande);
   }
   else{
