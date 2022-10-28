@@ -146,11 +146,10 @@ void conversion (char *texte, sequence_t *seq)
 }
 
 
-
-
+/*
 void afficher_suite_cellule_t (cellule_t* cel)
 {
-    assert (cel); /* Le pointeur doit être valide */
+    assert (cel); // Le pointeur doit être valide 
     cellule_t *cur;
     cur = cel->groupe_de_commande;
     while(cur!=NULL){
@@ -158,6 +157,7 @@ void afficher_suite_cellule_t (cellule_t* cel)
       cur = cur->suivant;
     }
 }
+*/
 void afficher (sequence_t* seq)
 {
     assert (seq); /* Le pointeur doit être valide */
@@ -165,7 +165,7 @@ void afficher (sequence_t* seq)
     cur = seq->tete;
     while(cur!=NULL){
       if (cur->type == GDC){
-        afficher_suite_cellule_t(cur->groupe_de_commande);
+        afficher_suites_de_cellule_t(cur->groupe_de_commande);
       }
       printf("%c ",cur->command);
       cur = cur->suivant;
@@ -323,7 +323,16 @@ cellule_t *dernier_suite_cellule_t(cellule_t *cur){
 
 void afficher_suites_de_cellule_t(cellule_t *cel){
   while(cel !=NULL){
-    printf("%c ",cel->command);
+    if (cel->type == GDC){
+      printf("{");
+      afficher_suites_de_cellule_t(cel->groupe_de_commande);
+      printf("}");
+    }
+    else
+    {
+      printf("%c ",cel->command);
+    }
+    aff
     cel = cel->suivant;
   }
 }
@@ -332,7 +341,7 @@ void afficher_pile_double(pile * p){
     assert (p);
     cellule_double *cur;
     cur = p->tete;
-    while(cur->type == INT){
+    while(cur != NULL){
       if (cur->groupe_de_commande == NULL){
         printf("%d ",cur->valeur_entier);
       }else{
