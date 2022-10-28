@@ -187,9 +187,9 @@ void afficher (sequence_t* seq)
       
       printf("%c ",cur->command);
       cur = cur->suivant;
+    }
     */
     afficher_suites_de_cellule_t(seq->tete);
-    }
 }
 // Definition méthodes pour act4 :
 
