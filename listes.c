@@ -87,7 +87,7 @@ void transform(char *c, sequence_t *seq){
 
 int sous_conversion (char *texte, cellule_t *seq, int i)
 {
-  printf("texte [i] : %c\n");
+  printf("texte [i] : %c\n", texte[i]);
   if (texte[i] == '}'){
     seq->groupe_de_commande = NULL;
     return i + 1;
