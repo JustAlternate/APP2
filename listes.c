@@ -85,7 +85,7 @@ void transform(char *c, sequence_t *seq){
   cur->suivant = cel;
 }
 
-void sous_conversion (char *texte, cellule_t *seq, int i)
+int sous_conversion (char *texte, cellule_t *seq, int i)
 {
   cellule_t *cur = nouvelleCellule();
   cur->command = texte[0];
@@ -147,19 +147,7 @@ void conversion (char *texte, sequence_t *seq)
 
 
 
-void afficher (sequence_t* seq)
-{
-    assert (seq); /* Le pointeur doit être valide */
-    cellule_t *cur;
-    cur = seq->tete;
-    while(cur!=NULL){
-      if (cur->type == GDC){
-        afficher_suite_cellule_t();
-      }
-      //printf("%c ",cur->command);
-      cur = cur->suivant;
-    }
-}
+
 void afficher_suite_cellule_t (cellule_t* cel)
 {
     assert (cel); /* Le pointeur doit être valide */
@@ -170,7 +158,19 @@ void afficher_suite_cellule_t (cellule_t* cel)
       cur = cur->suivant;
     }
 }
-
+void afficher (sequence_t* seq)
+{
+    assert (seq); /* Le pointeur doit être valide */
+    cellule_t *cur;
+    cur = seq->tete;
+    while(cur!=NULL){
+      if (cur->type == GDC){
+        afficher_suite_cellule_t(cur->groupe_de_commande);
+      }
+      //printf("%c ",cur->command);
+      cur = cur->suivant;
+    }
+}
 // Definition méthodes pour act4 :
 
 cellule_double* nouvelleCelluleDouble(void)
