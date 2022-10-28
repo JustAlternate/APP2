@@ -94,7 +94,7 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
   }
   cellule_t *cur = nouvelleCellule();
   seq->groupe_de_commande = cur;
-  on initialise
+  //on initialise
   if (texte[i] == '{'){
     printf("groupe de commande rencntré\n");
     i++;
