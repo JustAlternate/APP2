@@ -116,7 +116,7 @@ int interprete (sequence_t* seq, bool debug)
                 break;
         }
         if (!silent_mode){
-            printf("Pile : ");
+            printf("Pile : \n");
             afficher_pile_double(pile_calculette);
         
         }
