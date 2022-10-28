@@ -158,6 +158,23 @@ void afficher_suite_cellule_t (cellule_t* cel)
     }
 }
 */
+//remplacé par:
+void afficher_suites_de_cellule_t(cellule_t *cel){
+  while(cel !=NULL){
+    if (cel->type == GDC){
+      printf("{");
+      afficher_suites_de_cellule_t(cel->groupe_de_commande);
+      printf("}");
+    }
+    else
+    {
+      printf("%c ",cel->command);
+    }
+    cel = cel->suivant;
+  }
+}
+
+
 void afficher (sequence_t* seq)
 {
     assert (seq); /* Le pointeur doit être valide */
@@ -321,21 +338,7 @@ cellule_t *dernier_suite_cellule_t(cellule_t *cur){
   return cur;
 }
 
-void afficher_suites_de_cellule_t(cellule_t *cel){
-  while(cel !=NULL){
-    if (cel->type == GDC){
-      printf("{");
-      afficher_suites_de_cellule_t(cel->groupe_de_commande);
-      printf("}");
-    }
-    else
-    {
-      printf("%c ",cel->command);
-    }
-    aff
-    cel = cel->suivant;
-  }
-}
+
 
 void afficher_pile_double(pile * p){
     assert (p);
