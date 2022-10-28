@@ -154,7 +154,7 @@ void afficher_suite_cellule_t (cellule_t* cel)
     cellule_t *cur;
     cur = cel->groupe_de_commande;
     while(cur!=NULL){
-      //printf("%c ",cur->command);
+      printf("%c ",cur->command);
       cur = cur->suivant;
     }
 }
@@ -167,7 +167,7 @@ void afficher (sequence_t* seq)
       if (cur->type == GDC){
         afficher_suite_cellule_t(cur->groupe_de_commande);
       }
-      //printf("%c ",cur->command);
+      printf("%c ",cur->command);
       cur = cur->suivant;
     }
 }
