@@ -103,7 +103,7 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
     i = sous_conversion(texte, cur, i); // on met la sous-chaine de commande dans la 'commande'
   }
   else{
-    cur = nouvelleCellule();
+    cur->type = CHAR;
     cur->command = texte[i];
   }
   i++;
