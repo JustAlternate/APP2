@@ -36,12 +36,10 @@ int interprete (sequence_t* seq, bool debug)
     if (debug) stop();
 
     int ret;
-    int compteur;
 
     char commande;
 
     cellule_t *current_cel;
-    cellule_t *debut, *dernier; //pour les chaines de commande
     current_cel = seq->tete;
     pile *pile_calculette = creer_pile();
 
