@@ -137,13 +137,14 @@ void conversion (char *texte, sequence_t *seq)
   int i = 1;// on ajoute le premier caractere a part
   if (texte[0] != '\0'){ // cas spécial du premier caractere
     cellule_t *cur = nouvelleCellule();
-    if (texte[0] != '{'){//caractere normal
-      cur->type = CHAR;
-      cur->command = texte[0];
+    if (texte[0] == '{'){//caractere normal
+      cur->type = GDC;
+      cur->command = '{'
+      i = sous_conversion(texte, cur, i);
     }
     else{//chaine de commande
-      cur->type = GDC;
-      i = sous_conversion(texte, cur, i);
+      cur->type = CHAR;
+      cur->command = texte[0];
     }
     seq->tete = cur;
 
