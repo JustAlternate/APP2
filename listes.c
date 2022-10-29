@@ -186,9 +186,9 @@ void afficher_suite_cellule_t (cellule_t* cel)
 void afficher_suites_de_cellule_t(cellule_t *cel){
   while(cel !=NULL){
     if (cel->type == GDC){
-      printf("{");
+      printf("(");
       afficher_suites_de_cellule_t(cel->groupe_de_commande);
-      printf("}");
+      printf(")");
     }
     else
     {
