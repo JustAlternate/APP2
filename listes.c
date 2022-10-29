@@ -167,12 +167,13 @@ void conversion (char *texte, sequence_t *seq)
         printf("je sort");
       }
       else{if(texte[i] != ' '){
-        temp = nouvelleCellule();
-        temp->command = texte[i];
-        cur->suivant = temp;
-        cur = temp;
-      }}
-      i++;
+          temp = nouvelleCellule();
+          temp->command = texte[i];
+          cur->suivant = temp;
+          cur = temp;
+        }
+        i++;
+      }
     } while (texte[i] != '\0');
   }
 }
