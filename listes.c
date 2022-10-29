@@ -137,6 +137,7 @@ void conversion (char *texte, sequence_t *seq)
   vider_liste_t(seq);
   int i = 1;// on ajoute le premier caractere a part
   if (texte[0] != '\0'){ // cas spécial du premier caractere
+    printf("je regarde : %c\n", texte[0]);
     cellule_t *cur = nouvelleCellule();
     if (texte[0] == '{'){//caractere normal
       cur->type = GDC;
@@ -153,7 +154,9 @@ void conversion (char *texte, sequence_t *seq)
     cellule_t *temp;
     do
     {
+      printf("je regarde : %c\n", texte[i]);
       if (texte[i] == '{'){
+        printf("je rentre\n");
         i++;
         temp = nouvelleCellule();
         temp->type = GDC;
@@ -161,6 +164,7 @@ void conversion (char *texte, sequence_t *seq)
         i = sous_conversion(texte, temp, i); // on met la sous-chaine de commande dans la 'commande'
         cur->suivant = temp;
         cur = temp;
+        printf("je sort");
       }
       else{if(texte[i] != ' '){
         temp = nouvelleCellule();
