@@ -125,8 +125,8 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
       temp->command = texte[i];
       cur->suivant = temp;
       cur = temp;
+      i++;
     }}
-    i++;
   }
   return i;// on retourne l'emplacement de l'acolade fermante
 }
