@@ -139,7 +139,7 @@ void conversion (char *texte, sequence_t *seq)
     cellule_t *cur = nouvelleCellule();
     if (texte[0] == '{'){//caractere normal
       cur->type = GDC;
-      cur->command = '{'
+      cur->command = '{';
       i = sous_conversion(texte, cur, i);
     }
     else{//chaine de commande
