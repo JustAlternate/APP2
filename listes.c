@@ -186,13 +186,13 @@ void afficher_suite_cellule_t (cellule_t* cel)
 void afficher_suites_de_cellule_t(cellule_t *cel){
   while(cel !=NULL){
     if (cel->type == GDC){
-      printf("{ ");
+      printf("{");
       afficher_suites_de_cellule_t(cel->groupe_de_commande);
-      printf("} ");
+      printf("}");
     }
     else
     {
-      printf("%c ",cel->command);
+      printf("%c",cel->command);
     }
     cel = cel->suivant;
   }
@@ -373,11 +373,11 @@ void afficher_pile_double(pile * p){
     cur = p->tete;
     while(cur != NULL){
       if (cur->groupe_de_commande == NULL){
-        printf("%d ",cur->valeur_entier);
+        printf("%d",cur->valeur_entier);
       }else{
         printf("{");
         afficher_suites_de_cellule_t(cur->groupe_de_commande);
-        printf("} ");
+        printf("}");
       }
       cur = cur->suivant;
     }
