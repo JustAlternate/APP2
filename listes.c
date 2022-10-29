@@ -110,7 +110,7 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
   while(texte[i]!='}'){
     printf("je regarde : %c", texte[i]);
     if (texte[i] == '{'){
-      printf("je rentre\n")
+      printf("je rentre\n");
       i++;
       temp = nouvelleCellule();
       temp->type = GDC;
