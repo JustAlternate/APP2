@@ -127,8 +127,8 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
       cur->suivant = temp;
       cur = temp;
     }}
-    printf("prochain : %c\n", texte[i]);
     i++;
+    printf("prochain : %c\n", texte[i]);
   }
   return i;// on retourne l'emplacement de l'acolade fermante
 }
