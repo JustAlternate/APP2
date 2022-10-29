@@ -119,7 +119,6 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
       i = sous_conversion(texte, temp, i); // on met la sous-chaine de commande dans la 'commande'
       cur->suivant = temp;
       cur = temp;
-      i++;
       printf("je sort\n");
     }
     else{if(texte[i] != ' '){
@@ -127,9 +126,9 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
       temp->command = texte[i];
       cur->suivant = temp;
       cur = temp;
-      i++;
     }}
     printf("prochain : %c\n", texte[i]);
+    i++;
   }
   return i;// on retourne l'emplacement de l'acolade fermante
 }
