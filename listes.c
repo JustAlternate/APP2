@@ -141,6 +141,7 @@ void conversion (char *texte, sequence_t *seq)
       cur->type = GDC;
       cur->command = '{';
       i = sous_conversion(texte, cur, i);
+      i++;
     }
     else{//chaine de commande
       cur->type = CHAR;
