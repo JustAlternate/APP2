@@ -96,7 +96,6 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
   seq->groupe_de_commande = cur;
   //on initialise
   if (texte[i] == '{'){
-    printf("groupe de commande rencntré\n");
     i++;
     cur->type = GDC;
     cur->command = '{';
@@ -111,7 +110,6 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
   cellule_t *temp;
   while(texte[i]!='}'){
     if (texte[i] == '{'){
-      printf("groupe de commande rencntré\n");
       i++;
       temp = nouvelleCellule();
       temp->type = GDC;
