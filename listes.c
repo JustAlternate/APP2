@@ -89,7 +89,7 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
 {
   if (texte[i] == '}'){
     seq->groupe_de_commande = NULL;
-    return i + 1;
+    return i ;
   }
   cellule_t *cur = nouvelleCellule();
   seq->groupe_de_commande = cur;
