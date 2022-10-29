@@ -108,7 +108,9 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
 
   cellule_t *temp;
   while(texte[i]!='}'){
+    printf("je regarde : %c", texte[i]);
     if (texte[i] == '{'){
+      printf("je rentre\n")
       i++;
       temp = nouvelleCellule();
       temp->type = GDC;
@@ -116,6 +118,7 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
       i = sous_conversion(texte, temp, i); // on met la sous-chaine de commande dans la 'commande'
       cur->suivant = temp;
       cur = temp;
+      printf("je sort");
     }
     else{if(texte[i] != ' '){
       temp = nouvelleCellule();
