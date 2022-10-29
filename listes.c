@@ -94,6 +94,7 @@ int sous_conversion (char *texte, cellule_t *seq, int i)
   cellule_t *cur = nouvelleCellule();
   seq->groupe_de_commande = cur;
   //on initialise
+  printf("je regarde : %c\n", texte[i]);
   if (texte[i] == '{'){
     i++;
     cur->type = GDC;
