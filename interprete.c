@@ -26,7 +26,7 @@ void stop (void)
 
 int interprete (sequence_t* seq, bool debug)
 {
-    debug = true; /* À enlever par la suite et utiliser "-d" sur la ligne de commandes */
+    debug = false; /* À enlever par la suite et utiliser "-d" sur la ligne de commandes */
 
     if (!silent_mode){
       printf ("Programme:");
