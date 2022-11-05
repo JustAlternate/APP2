@@ -11,3 +11,12 @@ mettre ici:
 
 Le sujet manquait un peu d'indices surtout pour l'exercice 'leGateau'
 
+Conclusion sur les tests :
+
+Nos Tests de performances sont pour nous cohérent avec notre implémentation.
+Tout les tests semble être d'une complexité O(n).
+
+La courbe de "memfree" semble étrange a premiere vu, mais étant donné les temps tres faible nous pensons que  
+les variations sont du a l'environnement (serveur turing)
+
+
